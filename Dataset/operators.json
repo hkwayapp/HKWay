@@ -1,0 +1,128 @@
+[
+  {
+    "id" : "CTB",
+    "nameEnglish" : "Citybus",
+    "nameSimplified" : "城巴",
+    "nameTraditional" : "城巴",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "KMB",
+    "nameEnglish" : "Kowloon Motor Bus",
+    "nameSimplified" : "九巴",
+    "nameTraditional" : "九巴",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "LWB",
+    "nameEnglish" : "Long Win Bus",
+    "nameSimplified" : "龙运巴士",
+    "nameTraditional" : "龍運巴士",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "NLB",
+    "nameEnglish" : "New Lantao Bus",
+    "nameSimplified" : "新大屿山巴士",
+    "nameTraditional" : "新大嶼山巴士",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "KMB+CTB",
+    "nameEnglish" : "Joint Operation of KMB & CTB",
+    "nameSimplified" : "九巴\/城巴",
+    "nameTraditional" : "九巴\/城巴",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "LWB+CTB",
+    "nameEnglish" : "Joint Operation of LWB & CTB",
+    "nameSimplified" : "龙运\/城巴",
+    "nameTraditional" : "龍運\/城巴",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "PI",
+    "nameEnglish" : "Ma Wan Bus",
+    "nameSimplified" : "马湾巴士",
+    "nameTraditional" : "馬灣巴士",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "DB",
+    "nameEnglish" : "Discovery Bay Bus",
+    "nameSimplified" : "愉景湾巴士",
+    "nameTraditional" : "愉景灣巴士",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "XB",
+    "nameEnglish" : "Lok Ma Chau Cross Boundary Coach",
+    "nameSimplified" : "落马洲\/皇岗过境巴士",
+    "nameTraditional" : "落馬洲\/皇崗過境巴士",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "LRTFeeder",
+    "nameEnglish" : "Mass Transit Railway Feeder Bus",
+    "nameSimplified" : "港铁巴士",
+    "nameTraditional" : "港鐵巴士",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "GMB",
+    "nameEnglish" : "Green Minibus",
+    "nameSimplified" : "专线小巴",
+    "nameTraditional" : "專線小巴",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "FERRY",
+    "nameEnglish" : "Ferry",
+    "nameSimplified" : "渡轮",
+    "nameTraditional" : "渡輪",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "PTRAM",
+    "nameEnglish" : "Peak Tram",
+    "nameSimplified" : "山顶缆车",
+    "nameTraditional" : "山頂纜車",
+    "transportTypes" : [
+
+    ]
+  },
+  {
+    "id" : "TRAM",
+    "nameEnglish" : "Tram",
+    "nameSimplified" : "电车",
+    "nameTraditional" : "電車",
+    "transportTypes" : [
+
+    ]
+  }
+]
