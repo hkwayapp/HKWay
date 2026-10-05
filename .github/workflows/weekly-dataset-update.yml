@@ -2,8 +2,8 @@ name: Weekly transport dataset update
 
 on:
   schedule:
-    # Monday 11:15 Hong Kong time (03:15 UTC), subject to GitHub's scheduler delay.
-    - cron: "15 3 * * 1"
+    # Monday 02:00 Hong Kong time (Sunday 18:00 UTC), subject to GitHub's scheduler delay.
+    - cron: "0 18 * * 0"
   workflow_dispatch:
 
 permissions:
