@@ -1,0 +1,106 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "DB5C7D41",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "8.00",
+      "familyShareable" : false,
+      "internalID" : "tip-8",
+      "localizations" : [
+        {
+          "description" : "An optional tip to support HK Way. No features are unlocked.",
+          "displayName" : "Support HK Way",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "自愿打赏支持喂！香港，不会解锁功能。",
+          "displayName" : "支持喂！香港",
+          "locale" : "zh_Hans"
+        },
+        {
+          "description" : "自願打賞支持喂！香港，不會解鎖功能。",
+          "displayName" : "支持喂！香港",
+          "locale" : "zh_Hant"
+        }
+      ],
+      "productID" : "com.kenwong.hkway.tip.v2.8",
+      "referenceName" : "HK Way Tip 8",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "18.00",
+      "familyShareable" : false,
+      "internalID" : "tip-18",
+      "localizations" : [
+        { "description" : "An optional tip to support HK Way. No features are unlocked.", "displayName" : "Support HK Way", "locale" : "en_US" },
+        { "description" : "自愿打赏支持喂！香港，不会解锁功能。", "displayName" : "支持喂！香港", "locale" : "zh_Hans" },
+        { "description" : "自願打賞支持喂！香港，不會解鎖功能。", "displayName" : "支持喂！香港", "locale" : "zh_Hant" }
+      ],
+      "productID" : "com.kenwong.hkway.tip.v2.18",
+      "referenceName" : "HK Way Tip 18",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "38.00",
+      "familyShareable" : false,
+      "internalID" : "tip-38",
+      "localizations" : [
+        { "description" : "An optional tip to support HK Way. No features are unlocked.", "displayName" : "Support HK Way", "locale" : "en_US" },
+        { "description" : "自愿打赏支持喂！香港，不会解锁功能。", "displayName" : "支持喂！香港", "locale" : "zh_Hans" },
+        { "description" : "自願打賞支持喂！香港，不會解鎖功能。", "displayName" : "支持喂！香港", "locale" : "zh_Hant" }
+      ],
+      "productID" : "com.kenwong.hkway.tip.v2.38",
+      "referenceName" : "HK Way Tip 38",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "88.00",
+      "familyShareable" : false,
+      "internalID" : "tip-88",
+      "localizations" : [
+        { "description" : "An optional tip to support HK Way. No features are unlocked.", "displayName" : "Support HK Way", "locale" : "en_US" },
+        { "description" : "自愿打赏支持喂！香港，不会解锁功能。", "displayName" : "支持喂！香港", "locale" : "zh_Hans" },
+        { "description" : "自願打賞支持喂！香港，不會解鎖功能。", "displayName" : "支持喂！香港", "locale" : "zh_Hant" }
+      ],
+      "productID" : "com.kenwong.hkway.tip.v2.88",
+      "referenceName" : "HK Way Tip 88",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6809505472",
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_developerTeamID" : "7KR8YWP2RB",
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 810490744.65978098,
+    "_locale" : "zh_Hant_HK",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "HKG",
+    "_storeKitErrors" : [
+
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 5,
+    "minor" : 0
+  }
+}

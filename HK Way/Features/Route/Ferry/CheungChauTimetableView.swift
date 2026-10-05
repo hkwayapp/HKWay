@@ -1,0 +1,79 @@
+import SwiftUI
+
+struct CheungChauTimetableView: View {
+    let departure: FerryPier
+    let type: CheungChauFerryType
+    @State private var day: FerryServiceDay = .weekday
+    @State private var timetable: CheungChauTimetable?
+    @State private var failed = false
+
+    var body: some View {
+        CustomInfoCardView(title: "") {
+            VStack(alignment: .leading, spacing: 14) {
+                Text("Scheduled Departures").font(.headline)
+                Text("Timetable only — not live ETA")
+                    .font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                Text(LocalizedStringKey(departure == .central5 ? "Central → Cheung Chau" : "Cheung Chau → Central"))
+                    .font(.headline)
+                if failed {
+                    Text("Unable to load the timetable. Please use the official timetable link below.")
+                        .font(.subheadline).foregroundStyle(.secondary)
+                } else if let timetable {
+                    Picker("Service Day", selection: $day) {
+                        ForEach(FerryServiceDay.allCases) { option in
+                            Text(LocalizedStringKey(option.rawValue)).tag(option)
+                        }
+                    }
+                    .pickerStyle(.menu).tint(.primary)
+                    Text(LocalizedStringKey(type.rawValue))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(type == .fast ? Color.orange : Color.teal)
+                    Text("Select the service day manually, including public holidays. Times use the Hong Kong time zone and a 24-hour clock.")
+                        .font(.footnote).foregroundStyle(.secondary)
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 110), spacing: 12)], spacing: 12) {
+                        ForEach(timetable.departures(fromCentral: departure == .central5, day: day, type: type)) { sailing in
+                            VStack(spacing: 4) {
+                                Text(verbatim: sailing.clock).font(.title3.weight(.medium)).monospacedDigit()
+                                if sailing.nextDay { Text("Next calendar day").font(.caption) }
+                                operatingNote(sailing.operatingNote)
+                            }
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, minHeight: 54)
+                            .padding(6)
+                            .background(Color.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 12))
+                            .accessibilityElement(children: .combine)
+                        }
+                    }
+                    Text("Some Monday–Saturday entries operate only on weekdays or Saturdays. Check the label beneath the departure time.")
+                        .font(.footnote).foregroundStyle(.secondary)
+                } else {
+                    ProgressView("Loading timetable…").frame(maxWidth: .infinity)
+                }
+                Divider()
+                Text("Timetable snapshot retrieved: 2026-09-01. Schedules may change; check official notices before travelling.")
+                    .font(.footnote).foregroundStyle(.secondary)
+                Link("Timetable Open Data Source", destination: URL(string: "https://data.gov.hk/en-data/dataset/hk-td-wcms_8-ferry-services-tt-ft/resource/e291ac1b-83aa-4af7-b6ab-27d1e5b16fbf")!)
+                    .font(.footnote).foregroundStyle(.primary)
+            }
+            .padding(6).frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .foregroundStyle(.primary)
+        .task {
+            guard timetable == nil, !failed else { return }
+            await Task.yield()
+            guard !Task.isCancelled else { return }
+            do { timetable = try CheungChauTimetable.load() }
+            catch { failed = true }
+        }
+    }
+
+    @ViewBuilder
+    private func operatingNote(_ note: CheungChauOperatingNote) -> some View {
+        switch note {
+        case .none: EmptyView()
+        case .weekdaysOnly: Text("Mon–Fri only").font(.caption)
+        case .saturdayOnly: Text("Saturday only").font(.caption)
+        case .largeVesselWeekdays: Text("Large fast ferry · Mon–Fri only").font(.caption)
+        }
+    }
+}
