@@ -139,7 +139,7 @@ final class TVBusDataStore {
     private(set) var error: Error?
 
     private let baseURL = URL(
-        string: "https://raw.githubusercontent.com/kenwongtc/HKWay/main/Dataset/"
+        string: "https://raw.githubusercontent.com/hkwayapp/HKWay/main/Dataset/"
     )!
 
     func load() async {

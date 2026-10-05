@@ -26,15 +26,15 @@ enum DatasetFile: String, CaseIterable {
 struct DatasetUpdateService {
 
     private let metadataURL = URL(
-        string: "https://raw.githubusercontent.com/kenwongtc/HKWay/main/Dataset/dataset_info.json"
+        string: "https://raw.githubusercontent.com/hkwayapp/HKWay/main/Dataset/dataset_info.json"
     )!
     
     private let datasetBaseURL = URL(
-        string: "https://raw.githubusercontent.com/kenwongtc/HKWay/main/Dataset/"
+        string: "https://raw.githubusercontent.com/hkwayapp/HKWay/main/Dataset/"
     )!
     
     private let operatorsURL = URL(
-        string: "https://raw.githubusercontent.com/kenwongtc/HKWay/main/Dataset/operators.json"
+        string: "https://raw.githubusercontent.com/hkwayapp/HKWay/main/Dataset/operators.json"
     )!
     
 
