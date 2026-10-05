@@ -1,0 +1,10 @@
+[
+    {
+        "id": "kmb_1_outbound_1",
+        "routeId": "kmb_1",
+        "originStopId": "CHUK_YUEN",
+        "destinationStopId": "STAR_FERRY",
+        "direction": "outbound",
+        "serviceType": "1"
+    }
+]

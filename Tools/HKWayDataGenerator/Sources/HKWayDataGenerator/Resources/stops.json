@@ -1,0 +1,26 @@
+[
+    {
+        "id": "CHUK_YUEN",
+        "nameEnglish": "Chuk Yuen Estate",
+        "nameTraditional": "竹園邨",
+        "nameSimplified": "竹园邨",
+        "latitude": 22.3456,
+        "longitude": 114.1865
+    },
+    {
+        "id": "STAR_FERRY",
+        "nameEnglish": "Star Ferry",
+        "nameTraditional": "尖沙咀碼頭",
+        "nameSimplified": "尖沙咀码头",
+        "latitude": 22.2930,
+        "longitude": 114.1686
+    },
+    {
+          "id": "WONG_TAI_SIN",
+          "nameEnglish": "Wong Tai Sin",
+          "nameTraditional": "黃大仙",
+          "nameSimplified": "黄大仙",
+          "latitude": 22.342,
+          "longitude": 114.193
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+        "id": "KMB",
+        "nameEnglish": "Kowloon Motor Bus",
+        "nameTraditional": "九巴",
+        "nameSimplified": "九巴",
+        "transportTypes": []
+    },
+    {
+        "id": "CTB",
+        "nameEnglish": "Citybus",
+        "nameTraditional": "城巴",
+        "nameSimplified": "城巴",
+        "transportTypes": []
+    },
+    {
+        "id": "NLB",
+        "nameEnglish": "New Lantao Bus",
+        "nameTraditional": "新大嶼山巴士",
+        "nameSimplified": "新大屿山巴士",
+        "transportTypes": []
+    },
+    {
+        "id": "GMB",
+        "nameEnglish": "Green Minibus",
+        "nameTraditional": "專線小巴",
+        "nameSimplified": "专线小巴",
+        "transportTypes": []
+    },
+    {
+        "id": "MTR",
+        "nameEnglish": "MTR",
+        "nameTraditional": "港鐵",
+        "nameSimplified": "港铁",
+        "transportTypes": []
+    },
+    {
+        "id": "TRAM",
+        "nameEnglish": "Tram",
+        "nameTraditional": "電車",
+        "nameSimplified": "电车",
+        "transportTypes": []
+    },
+    {
+        "id": "PTRAM",
+        "nameEnglish": "Peak Tram",
+        "nameTraditional": "山頂纜車",
+        "nameSimplified": "山顶缆车",
+        "transportTypes": []
+    },
+    {
+        "id": "DB",
+        "nameEnglish": "Discovery Bay Bus",
+        "nameTraditional": "愉景灣巴士",
+        "nameSimplified": "愉景湾巴士",
+        "transportTypes": []
+    }
+]

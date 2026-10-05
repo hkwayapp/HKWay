@@ -1,0 +1,14 @@
+[
+    {
+        "id": "kmb_1_outbound_1_0800",
+        "journeyId": "kmb_1_outbound_1",
+        "serviceType": "1",
+        "departureTime": "08:00"
+    },
+    {
+        "id": "kmb_1_outbound_1_0815",
+        "journeyId": "kmb_1_outbound_1",
+        "serviceType": "1",
+        "departureTime": "08:15"
+    }
+]

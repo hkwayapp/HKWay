@@ -1,0 +1,56 @@
+name: Weekly transport dataset update
+
+on:
+  schedule:
+    # Monday 11:15 Hong Kong time (03:15 UTC), subject to GitHub's scheduler delay.
+    - cron: "15 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-dataset:
+    name: Refresh official transport data
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out HK Way
+        uses: actions/checkout@v4
+
+      - name: Refresh Transport Department source files
+        working-directory: Tools/HKWayDataGenerator/Sources/HKWayDataGenerator/Resources
+        run: |
+          set -euo pipefail
+          source_base='https://static.data.gov.hk/td/routes-fares-xml'
+          for file in COMPANY_CODE.xml ROUTE_BUS.xml RSTOP_BUS.xml STOP_BUS.xml; do
+            curl --fail --location --retry 3 --retry-all-errors \
+              --output "$file" "$source_base/$file"
+          done
+
+      - name: Build the validated HK Way dataset
+        run: |
+          set -euo pipefail
+          swift run --package-path Tools/HKWayDataGenerator HKWayDataGenerator
+
+      - name: Publish generated files into the app dataset
+        run: |
+          set -euo pipefail
+          for name in operators routes journeys journey_stops stops schedules operator_stop_references dataset_info; do
+            cp "Output/$name.json" "Dataset/$name.json"
+          done
+          rm -rf Output
+
+      - name: Commit only a changed dataset
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- Dataset; then
+            echo 'No dataset changes to publish.'
+            exit 0
+          fi
+          git config user.name 'HK Way Dataset Bot'
+          git config user.email 'actions@github.com'
+          git add Dataset
+          git commit -m 'Update weekly transport dataset'
+          git push

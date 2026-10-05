@@ -1,0 +1,17 @@
+[
+    {
+        "journeyId": "kmb_1_outbound_1",
+        "stopId": "CHUK_YUEN",
+        "sequence": 1
+    },
+    {
+        "journeyId": "kmb_1_outbound_1",
+        "stopId": "WONG_TAI_SIN",
+        "sequence": 2
+    },
+    {
+        "journeyId": "kmb_1_outbound_1",
+        "stopId": "STAR_FERRY",
+        "sequence": 3
+    }
+]

@@ -1,0 +1,15 @@
+[
+    {
+        "id": "kmb_1",
+        "number": "1",
+        "operatorIds": [
+            "KMB"
+        ],
+        "originEnglish": "CHUK YUEN ESTATE",
+        "originTraditional": "竹園邨",
+        "originSimplified": "竹园邨",
+        "destinationEnglish": "STAR FERRY",
+        "destinationTraditional": "尖沙咀碼頭",
+        "destinationSimplified": "尖沙咀码头"
+    }
+]
