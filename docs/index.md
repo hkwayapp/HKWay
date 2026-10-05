@@ -38,7 +38,7 @@ This policy may be updated when HK Way’s features or legal requirements change
 
 ## Contact
 
-For privacy questions, open an issue in the [HK Way GitHub repository](https://github.com/kenwongtc/HKWay/issues).
+For privacy questions, open an issue in the [HK Way GitHub repository](https://github.com/hkwayapp/HKWay/issues).
 
 ---
 
@@ -78,4 +78,4 @@ Google 及其廣告合作夥伴可能會按你的裝置設定、同意選擇及�
 
 ## 聯絡方法
 
-如有私隱問題，請在 [HK Way GitHub 儲存庫](https://github.com/kenwongtc/HKWay/issues)建立 issue。
+如有私隱問題，請在 [HK Way GitHub 儲存庫](https://github.com/hkwayapp/HKWay/issues)建立 issue。
