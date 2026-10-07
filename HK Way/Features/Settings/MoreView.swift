@@ -187,6 +187,17 @@ struct MoreView: View {
                             color: .pink
                         )
                     }
+
+                    Link(destination: weiGuessWebsiteURL) {
+                        weiGuessRow
+                    }
+                    .accessibilityHint(
+                        transitLanguage.newsText(
+                            "Opens the Wei! Guess website",
+                            "開啟《喂！估吓啦～》網站",
+                            "打开《喂！估吓啦～》网站"
+                        )
+                    )
                 } header: {
                     Text(LocalizedStringKey("Settings"))
                 } footer: {
@@ -255,6 +266,44 @@ struct MoreView: View {
         case .traditionalChinese: "資料由 data.gov.hk 提供"
         case .simplifiedChinese: "数据由 data.gov.hk 提供"
         }
+    }
+
+    private var weiGuessWebsiteURL: URL {
+        URL(string: "https://hkwayapp.github.io/")!
+    }
+
+    private var weiGuessRow: some View {
+        HStack(spacing: 14) {
+            Image("WeiGuessAppIcon")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 34, height: 34)
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(transitLanguage.newsText("Wei! Guess", "喂！估吓啦～", "喂！估吓啦～"))
+                    .foregroundStyle(.primary)
+
+                Text(
+                    transitLanguage.newsText(
+                        "Cantonese emoji puzzle game",
+                        "用 Emoji 猜地道廣東話",
+                        "用 Emoji 猜地道粤语"
+                    )
+                )
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+            }
+
+            Spacer(minLength: 8)
+
+            Image(systemName: "arrow.up.right.square")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 1)
     }
 
     private func localized(_ key: String) -> String {
