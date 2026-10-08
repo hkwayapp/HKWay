@@ -17,7 +17,6 @@ private struct RelatedApp: Identifiable {
 struct OtherAppsView: View {
     @Environment(\.transitLanguage) private var transitLanguage
 
-    // Replace the App Store search URL with the app's canonical product URL once Wei! Guess is live.
     private let apps: [RelatedApp] = [
         RelatedApp(
             id: "wei-guess",
@@ -30,7 +29,7 @@ struct OtherAppsView: View {
                 )
             },
             iconAssetName: "WeiGuessAppIcon",
-            appStoreURL: URL(string: "https://apps.apple.com/hk/search?term=Wei%20Guess")!
+            appStoreURL: URL(string: "https://apps.apple.com/us/app/%E5%96%82-%E4%BC%B0%E5%90%93%E5%95%A6/id6818760483")!
         )
     ]
 
