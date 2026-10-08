@@ -40,6 +40,7 @@ struct OtherAppsView: View {
                     Link(destination: app.appStoreURL) {
                         appRow(app)
                     }
+                    .tint(.primary)
                     .accessibilityHint(openAppStoreHint)
                 }
             } header: {
@@ -77,7 +78,7 @@ struct OtherAppsView: View {
 
             Image(systemName: "arrow.up.right.square")
                 .font(.title3.weight(.semibold))
-                .foregroundStyle(.tint)
+                .foregroundStyle(.secondary)
                 .accessibilityHidden(true)
         }
         .padding(.vertical, 4)
