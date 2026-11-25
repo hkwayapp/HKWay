@@ -70,42 +70,53 @@ struct CTBOperatorStopReferenceBuilder {
                 routeNumbers.count
             )
 
-            for routeNumber in
-                routeNumbers.sorted() {
+            let routeDirectionPairs =
+                routeNumbers.sorted().flatMap { routeNumber in
+                    ["outbound", "inbound"].map {
+                        (routeNumber, $0)
+                    }
+                }
 
-                for direction in [
-                    "outbound",
-                    "inbound"
-                ] {
+            // Fetch a small batch at a time. The former fully sequential loop
+            // made the weekly GitHub Action exceed its 30-minute time limit.
+            for startIndex in stride(
+                from: 0,
+                to: routeDirectionPairs.count,
+                by: 8
+            ) {
+                let endIndex = min(
+                    startIndex + 8,
+                    routeDirectionPairs.count
+                )
+                let batch = routeDirectionPairs[startIndex..<endIndex]
 
-                    do {
-
-                        let routeStops =
-                            try await cache.routeStops(
-                                route:
-                                    routeNumber,
-                                direction:
-                                    direction
-                            )
-
-                        for routeStop in routeStops {
-
-                            allCTBStopIds.insert(
-                                routeStop.stop
-                            )
+                await withTaskGroup(
+                    of: [CTBRouteStopRecord].self
+                ) { group in
+                    for (routeNumber, direction) in batch {
+                        group.addTask {
+                            do {
+                                return try await cache.routeStops(
+                                    route: routeNumber,
+                                    direction: direction
+                                )
+                            } catch {
+                                await DatasetHTTP.recordFailure("CTB route \(routeNumber)/\(direction)", error)
+                                print(
+                                    "CTB route-stop prefetch failed",
+                                    "| route:", routeNumber,
+                                    "| direction:", direction,
+                                    "| error:", error
+                                )
+                                return []
+                            }
                         }
+                    }
 
-                    } catch {
-
-                        print(
-                            "CTB route-stop prefetch failed",
-                            "| route:",
-                            routeNumber,
-                            "| direction:",
-                            direction,
-                            "| error:",
-                            error
-                        )
+                    for await routeStops in group {
+                        for routeStop in routeStops {
+                            allCTBStopIds.insert(routeStop.stop)
+                        }
                     }
                 }
             }
@@ -121,6 +132,7 @@ struct CTBOperatorStopReferenceBuilder {
                 concurrency:
                     8
             )
+            await cache.saveHistory()
 
             print("")
             print("*** CTB alignment phase ***")
@@ -649,6 +661,7 @@ struct CTBOperatorStopReferenceBuilder {
 
             } catch {
 
+                await DatasetHTTP.recordFailure("CTB route \(route.number)/\(direction)", error)
                 print(
                     "CTB direction candidate failed",
                     "| route:",
@@ -934,8 +947,8 @@ private actor CTBOperatorStopReferenceCache {
     private let routeStopAPI =
         CTBRouteStopAPI()
 
-    private let stopAPI =
-        CTBStopAPI()
+    private let history = CTBStopHistory()
+    private var unavailableStops: Set<String> = []
 
     private var routeStopsByKey:
         [String: [CTBRouteStopRecord]] = [:]
@@ -987,16 +1000,42 @@ private actor CTBOperatorStopReferenceCache {
             return cached
         }
 
-        let record =
-            try await stopAPI.fetch(
-                stopId:
-                    stopId
-            )
+        guard !unavailableStops.contains(stopId) else {
+            throw CTBStopAPIError.invalidResponse
+        }
+        let record = try await resolveStop(stopId)
 
         stopsById[stopId] =
             record
 
         return record
+    }
+
+    private func resolveStop(_ id: String) async throws -> CTBStopRecord {
+        do {
+            switch try await history.resolve(id, fetch: { try await CTBStopAPI().fetch(stopId: id) }) {
+            case .current(let stop):
+                return stop
+            case .historical(let stop):
+                let routes = affectedRoutes(for: id)
+                print("CTB retained stop \(id); affected routes/directions: \(routes)")
+                await DatasetHTTP.recordRetention("CTB historical stop \(id) [\(routes)]")
+                return stop
+            }
+        } catch {
+            let routes = affectedRoutes(for: id)
+            unavailableStops.insert(id)
+            await DatasetHTTP.recordFailure("CTB missing stop \(id) [\(routes)]", error)
+            throw error
+        }
+    }
+
+    private func affectedRoutes(for id: String) -> String {
+        routeStopsByKey.filter { $0.value.contains { $0.stop == id } }.keys.sorted().joined(separator: ", ")
+    }
+
+    func saveHistory() async {
+        await history.save()
     }
 
     // MARK: - Prefetch Stops
@@ -1074,11 +1113,7 @@ private actor CTBOperatorStopReferenceCache {
                             do {
 
                                 let record =
-                                    try await CTBStopAPI()
-                                        .fetch(
-                                            stopId:
-                                                stopId
-                                        )
+                                    try await self.resolveStop(stopId)
 
                                 return CTBPrefetchedStop(
                                     stopId:

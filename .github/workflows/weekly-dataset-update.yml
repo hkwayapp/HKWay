@@ -12,35 +12,85 @@ permissions:
 jobs:
   refresh-dataset:
     name: Refresh official transport data
-    runs-on: macos-latest
-    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - name: Check out HK Way
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.1.0
 
       - name: Refresh Transport Department source files
         working-directory: Tools/HKWayDataGenerator/Sources/HKWayDataGenerator/Resources
         run: |
           set -euo pipefail
           source_base='https://static.data.gov.hk/td/routes-fares-xml'
-          for file in COMPANY_CODE.xml ROUTE_BUS.xml RSTOP_BUS.xml STOP_BUS.xml; do
-            curl --fail --location --retry 3 --retry-all-errors \
-              --output "$file" "$source_base/$file"
+          stage=$(mktemp -d)
+          files=(COMPANY_CODE.xml ROUTE_BUS.xml RSTOP_BUS.xml STOP_BUS.xml)
+          pids=()
+          for file in "${files[@]}"; do
+            curl --fail --location --connect-timeout 10 --max-time 90 \
+              --retry 2 --retry-all-errors \
+              --silent --show-error --write-out "$file HTTP %{http_code}, transfer %{time_total}s\n" \
+              --output "$stage/$file" "$source_base/$file" &
+            pids+=("$!")
+          done
+          failed=0
+          for i in "${!pids[@]}"; do
+            if ! wait "${pids[i]}" || [[ ! -s "$stage/${files[i]}" ]]; then
+              echo "::error::TD source failed: ${files[i]}"
+              failed=1
+            fi
+          done
+          if (( failed )); then exit 1; fi
+          for file in "${files[@]}"; do
+            cp "$stage/$file" "$file"
           done
 
-      - name: Build the validated HK Way dataset
+      - name: Compile the standalone dataset generator
+        id: generator
         run: |
           set -euo pipefail
-          swift run --package-path Tools/HKWayDataGenerator HKWayDataGenerator
+          swift --version
+          time swift build --package-path Tools/HKWayDataGenerator --configuration release
+          bin=$(swift build --package-path Tools/HKWayDataGenerator --configuration release --show-bin-path)
+          printf 'binary=%s/HKWayDataGenerator\n' "$bin" >> "$GITHUB_OUTPUT"
+
+      - name: Restore verified CTB stop history
+        uses: actions/cache/restore@v5.1.0
+        with:
+          path: ${{ runner.temp }}/hkway-ctb-stop-history.json
+          key: hkway-ctb-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: hkway-ctb-v1-
+
+      - name: Generate and validate a staged dataset
+        id: dataset
+        env:
+          GENERATOR: ${{ steps.generator.outputs.binary }}
+          HKWAY_CTB_HISTORY: ${{ runner.temp }}/hkway-ctb-stop-history.json
+          HKWAY_BASELINE_MANIFEST: ${{ github.workspace }}/Dataset/dataset_info.json
+        run: |
+          set -euo pipefail
+          stage=$(mktemp -d)
+          (cd "$stage" && time stdbuf -oL "$GENERATOR")
+          time python3 Tools/HKWayDataGenerator/validate_weekly_dataset.py Dataset "$stage/Output"
+          echo 'FULL SUCCESS: combined staged dataset validated.'
+          printf 'output=%s/Output\n' "$stage" >> "$GITHUB_OUTPUT"
+
+      - name: Save verified CTB stop history
+        if: ${{ !cancelled() && (steps.dataset.outcome == 'success' || steps.dataset.outcome == 'failure') }}
+        uses: actions/cache/save@v5.1.0
+        with:
+          path: ${{ runner.temp }}/hkway-ctb-stop-history.json
+          key: hkway-ctb-v1-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Publish generated files into the app dataset
+        env:
+          STAGED_DATASET: ${{ steps.dataset.outputs.output }}
         run: |
           set -euo pipefail
           for name in operators routes journeys journey_stops stops schedules operator_stop_references dataset_info; do
-            cp "Output/$name.json" "Dataset/$name.json"
+            cp "$STAGED_DATASET/$name.json" "Dataset/$name.json"
           done
-          rm -rf Output
 
       - name: Commit only a changed dataset
         run: |

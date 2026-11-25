@@ -46,39 +46,48 @@ struct RealDataBuilder {
         let rawStops =
             try stopBuilder.build()
 
+        let geographyStart = ProcessInfo.processInfo.systemUptime
         let districtBoundaries = try await
             DistrictBoundaryClient().fetch()
 
         let stops = StopGeographyEnricher(
             boundaries: districtBoundaries
         ).enrich(rawStops)
+        print("District geography elapsed: \(ProcessInfo.processInfo.systemUptime - geographyStart)s")
 
         // Build KMB operator-specific stop references.
 
-        let kmbReferenceResult =
+        let kmb = await DatasetOperatorStage.run("KMB") {
             try await kmbOperatorStopReferenceBuilder.buildAll(
                 routes: routes,
                 journeys: journeys,
                 journeyStops: journeyStops,
                 stops: stops
             )
+        }
 
-        let ctbReferenceResult =
+        let ctb = await DatasetOperatorStage.run("CTB") {
             try await ctbOperatorStopReferenceBuilder.buildAll(
                 routes: routes,
                 journeys: journeys,
                 journeyStops: journeyStops,
                 stops: stops
             )
+        }
 
-        let nlbReferenceResult =
+        let nlb = await DatasetOperatorStage.run("NLB") {
             try await nlbOperatorStopReferenceBuilder.buildAll(
                 routes: routes,
                 journeys: journeys,
                 journeyStops: journeyStops,
                 stops: stops
             )
+        }
 
+        try DatasetOperatorStage.requirePublishable([kmb.complete, ctb.complete, nlb.complete])
+        try await DatasetHTTP.requireCompleteSources()
+        guard let kmbReferenceResult = kmb.value, let ctbReferenceResult = ctb.value,
+              let nlbReferenceResult = nlb.value else { throw DatasetOperatorStage.PublicationBlocked() }
         print("")
         print("*** KMB operator stop references ***")
 

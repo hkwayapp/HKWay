@@ -208,8 +208,12 @@ struct HKWayDataGeneratorApp {
                 return
             }
 
+            let baselineManifest = try ProcessInfo.processInfo.environment["HKWAY_BASELINE_MANIFEST"].map {
+                try JSONDecoder().decode(DataVersion.self, from: Data(contentsOf: URL(fileURLWithPath: $0)))
+            }
             let masterData =
                 try await RealDataBuilder().build()
+            try await DatasetHTTP.requireCompleteSources()
 
             let outputDirectory =
                 rootDirectory.appendingPathComponent(
@@ -218,7 +222,8 @@ struct HKWayDataGeneratorApp {
 
             try MasterDataExporter().export(
                 masterData,
-                to: outputDirectory
+                to: outputDirectory,
+                fareDataUpdatedAt: baselineManifest?.fareDataUpdatedAt
             )
 
             print("Export completed.")
@@ -269,6 +274,7 @@ struct HKWayDataGeneratorApp {
                 "ERROR:",
                 error
             )
+            exit(EXIT_FAILURE)
         }
     }
 }

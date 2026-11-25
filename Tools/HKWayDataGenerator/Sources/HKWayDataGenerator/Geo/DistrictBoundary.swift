@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct DistrictBoundary: Sendable {
     let id: String
@@ -98,7 +101,7 @@ struct DistrictBoundaryClient {
     )!
 
     func fetch() async throws -> [DistrictBoundary] {
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, response) = try await DatasetHTTP.data(from: url)
 
         guard let httpResponse = response as? HTTPURLResponse,
               (200..<300).contains(httpResponse.statusCode) else {

@@ -17,7 +17,8 @@ let package = Package(
             resources: [
                 .process("Resources")
             ]
-        )
+        ),
+        .testTarget(name: "HKWayDataGeneratorTests", dependencies: ["HKWayDataGenerator"])
     ],
 
     swiftLanguageModes: [.v6]

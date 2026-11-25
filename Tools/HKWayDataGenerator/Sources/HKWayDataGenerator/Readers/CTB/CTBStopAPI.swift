@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct CTBStopRecord: Codable, Sendable {
 
@@ -39,19 +42,9 @@ struct CTBStopRecord: Codable, Sendable {
     }
 }
 
-private struct CTBStopResponse: Codable {
-
+private struct CTBStopResponse: Decodable {
     let type: String
-    let version: String
-    let generatedTimestamp: String
     let data: CTBStopRecord
-
-    enum CodingKeys: String, CodingKey {
-        case type
-        case version
-        case generatedTimestamp = "generated_timestamp "
-        case data
-    }
 }
 
 struct CTBStopAPI {
@@ -68,8 +61,8 @@ struct CTBStopAPI {
         }
 
         let (data, response) =
-            try await URLSession.shared.data(
-                from: url
+            try await DatasetHTTP.data(
+                from: url, trackFailure: false
             )
 
         guard
@@ -82,13 +75,20 @@ struct CTBStopAPI {
             throw CTBStopAPIError.invalidResponse
         }
 
-        let responseObject =
-            try JSONDecoder().decode(
-                CTBStopResponse.self,
-                from: data
-            )
+        do {
+            return try Self.decode(data, stopId: stopId)
+        } catch {
+            print("CTB stop \(stopId): HTTP \(httpResponse.statusCode), invalid response: \(error)")
+            throw error
+        }
+    }
 
-        return responseObject.data
+    static func decode(_ data: Data, stopId: String) throws -> CTBStopRecord {
+        let response = try JSONDecoder().decode(CTBStopResponse.self, from: data)
+        guard response.type == "Stop", response.data.isValid(for: stopId) else {
+            throw CTBStopAPIError.invalidResponse
+        }
+        return response.data
     }
 }
 

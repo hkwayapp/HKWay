@@ -4,6 +4,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct CSDIBusRouteShape: Equatable {
     let routeId: String
@@ -251,7 +254,7 @@ struct CSDIBusRouteShapeReader {
             forHTTPHeaderField: "Cache-Control"
         )
 
-        return try await URLSession.shared.data(
+        return try await DatasetHTTP.data(
             for: request
         )
     }

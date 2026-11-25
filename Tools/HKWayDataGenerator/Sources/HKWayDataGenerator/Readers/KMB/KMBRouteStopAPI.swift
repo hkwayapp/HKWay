@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct KMBRouteStopRecord: Codable, Sendable {
 
@@ -59,7 +62,7 @@ struct KMBRouteStopAPI {
             throw KMBRouteStopAPIError.invalidURL
         }
 
-        let (data, response) = try await URLSession.shared.data(
+        let (data, response) = try await DatasetHTTP.data(
             from: url
         )
 

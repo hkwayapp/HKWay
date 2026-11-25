@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationXML)
+import FoundationXML
+#endif
 
 final class CompanyCodeReader: NSObject, XMLParserDelegate {
     

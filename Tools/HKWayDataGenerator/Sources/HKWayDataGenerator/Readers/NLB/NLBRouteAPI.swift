@@ -4,6 +4,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct NLBRouteRecord: Codable, Sendable {
 
@@ -24,6 +27,21 @@ struct NLBRouteRecord: Codable, Sendable {
         case isOvernightRoute = "overnightRoute"
         case isSpecialRoute = "specialRoute"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let stringID = try? container.decode(String.self, forKey: .routeId) {
+            routeId = stringID
+        } else {
+            routeId = String(try container.decode(Int.self, forKey: .routeId))
+        }
+        routeNumber = try container.decode(String.self, forKey: .routeNumber)
+        routeNameTraditional = try container.decode(String.self, forKey: .routeNameTraditional)
+        routeNameSimplified = try container.decode(String.self, forKey: .routeNameSimplified)
+        routeNameEnglish = try container.decode(String.self, forKey: .routeNameEnglish)
+        isOvernightRoute = try container.decode(Int.self, forKey: .isOvernightRoute)
+        isSpecialRoute = try container.decode(Int.self, forKey: .isSpecialRoute)
+    }
 }
 
 private struct NLBRouteListResponse: Codable {
@@ -43,7 +61,7 @@ struct NLBRouteAPI {
         }
 
         let (data, response) =
-            try await URLSession.shared.data(
+            try await DatasetHTTP.data(
                 from: url
             )
 

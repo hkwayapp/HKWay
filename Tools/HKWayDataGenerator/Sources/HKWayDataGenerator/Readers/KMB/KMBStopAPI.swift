@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct KMBStopRecord: Codable, Sendable {
 
@@ -80,7 +83,7 @@ struct KMBStopAPI {
         }
 
         let (data, response) =
-            try await URLSession.shared.data(
+            try await DatasetHTTP.data(
                 from: url
             )
 
@@ -109,7 +112,7 @@ struct KMBStopAPI {
         }
 
         let (data, response) =
-            try await URLSession.shared.data(
+            try await DatasetHTTP.data(
                 from: url
             )
 

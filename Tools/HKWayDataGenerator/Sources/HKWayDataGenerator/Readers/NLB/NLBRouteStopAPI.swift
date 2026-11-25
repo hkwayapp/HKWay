@@ -4,6 +4,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct NLBRouteStopRecord: Codable, Sendable {
 
@@ -27,6 +30,23 @@ struct NLBRouteStopRecord: Codable, Sendable {
         case stopLocationEnglish = "stopLocation_e"
         case latitude
         case longitude
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let stringID = try? container.decode(String.self, forKey: .stopId) {
+            stopId = stringID
+        } else {
+            stopId = String(try container.decode(Int.self, forKey: .stopId))
+        }
+        stopNameTraditional = try container.decode(String.self, forKey: .stopNameTraditional)
+        stopNameSimplified = try container.decode(String.self, forKey: .stopNameSimplified)
+        stopNameEnglish = try container.decode(String.self, forKey: .stopNameEnglish)
+        stopLocationTraditional = try container.decode(String.self, forKey: .stopLocationTraditional)
+        stopLocationSimplified = try container.decode(String.self, forKey: .stopLocationSimplified)
+        stopLocationEnglish = try container.decode(String.self, forKey: .stopLocationEnglish)
+        latitude = try container.decode(String.self, forKey: .latitude)
+        longitude = try container.decode(String.self, forKey: .longitude)
     }
 }
 
@@ -61,7 +81,7 @@ struct NLBRouteStopAPI {
         }
 
         let (data, response) =
-            try await URLSession.shared.data(
+            try await DatasetHTTP.data(
                 from: url
             )
 

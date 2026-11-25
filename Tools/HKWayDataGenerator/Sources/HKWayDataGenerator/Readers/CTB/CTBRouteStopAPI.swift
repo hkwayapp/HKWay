@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 struct CTBRouteStopRecord: Codable, Sendable {
 
@@ -59,7 +62,7 @@ struct CTBRouteStopAPI {
         }
 
         let (data, response) =
-            try await URLSession.shared.data(
+            try await DatasetHTTP.data(
                 from: url
             )
 

@@ -11,7 +11,8 @@ struct MasterDataExporter {
 
     func export(
         _ data: MasterData,
-        to directory: URL
+        to directory: URL,
+        fareDataUpdatedAt: String? = nil
     ) throws {
 
         try FileManager.default.createDirectory(
@@ -36,7 +37,8 @@ struct MasterDataExporter {
 
         let version = DataVersion(
             version: versionFormatter.string(from: now),
-            generatedAt: isoFormatter.string(from: now)
+            generatedAt: isoFormatter.string(from: now),
+            fareDataUpdatedAt: fareDataUpdatedAt
         )
 
         try encode(

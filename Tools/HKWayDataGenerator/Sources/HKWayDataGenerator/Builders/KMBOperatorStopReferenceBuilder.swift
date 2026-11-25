@@ -52,11 +52,21 @@ struct KMBOperatorStopReferenceBuilder {
         stops: [Stop],
     ) async throws -> KMBOperatorStopReferenceBuildResult {
         
-        let kmbRoutes =
+        async let routeList =
         try await routeAPI.fetchAll()
         
-        let kmbStops =
+        async let stopList =
         try await stopAPI.fetchAll()
+        let (kmbRoutes, kmbStops) = try await (routeList, stopList)
+
+        var routeStopCache: [String: [KMBRouteStopRecord]] = [:]
+        func routeStops(route: String, direction: String, serviceType: String) async throws -> [KMBRouteStopRecord] {
+            let key = "\(route)/\(direction)/\(serviceType)"
+            if let records = routeStopCache[key] { return records }
+            let records = try await routeStopAPI.fetch(route: route, direction: direction, serviceType: serviceType)
+            routeStopCache[key] = records
+            return records
+        }
         
         let kmbTransitRoutes =
             routes.filter {
@@ -187,7 +197,7 @@ struct KMBOperatorStopReferenceBuilder {
                 for apiRoute in apiRoutes {
 
                     let apiStops =
-                        try await routeStopAPI.fetch(
+                        try await routeStops(
                             route:
                                 apiRoute.route,
                             direction:
@@ -314,7 +324,7 @@ struct KMBOperatorStopReferenceBuilder {
                 for apiRoute in matchingAPIRoutes {
                     
                     let apiStops =
-                    try await routeStopAPI.fetch(
+                    try await routeStops(
                         route:
                             apiRoute.route,
                         direction:
