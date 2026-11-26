@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T02:22:07Z",
+  "generatedAt": "2026-11-26T02:40:23Z",
   "routes": {
     "7005": {
       "sources": [
@@ -8,7 +8,7 @@
         "https://www.td.gov.hk/datagovhk_td/ferry-tt-ft/resources/en/dataspec/franchised_and_licensed_ferry_time_and_fare_tables_dataspec_eng.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:06Z"
+      "verifiedAt": "2026-11-26T02:40:17Z"
     },
     "7006": {
       "sources": [
@@ -17,7 +17,7 @@
         "https://www.td.gov.hk/datagovhk_td/ferry-tt-ft/resources/en/dataspec/franchised_and_licensed_ferry_time_and_fare_tables_dataspec_eng.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:06Z"
+      "verifiedAt": "2026-11-26T02:40:17Z"
     },
     "7007": {
       "sources": [
@@ -29,7 +29,7 @@
         "https://www.hkkfeta.com/datagovhk/HKKF_ETA_API_Specification.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:07Z"
+      "verifiedAt": "2026-11-26T02:40:20Z"
     },
     "7008": {
       "sources": [
@@ -41,7 +41,7 @@
         "https://www.hkkfeta.com/datagovhk/HKKF_ETA_API_Specification.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:07Z"
+      "verifiedAt": "2026-11-26T02:40:21Z"
     },
     "7009": {
       "sources": [
@@ -53,7 +53,7 @@
         "https://www.hkkfeta.com/datagovhk/HKKF_ETA_API_Specification.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:07Z"
+      "verifiedAt": "2026-11-26T02:40:21Z"
     },
     "7017": {
       "sources": [
@@ -62,7 +62,7 @@
         "https://www.td.gov.hk/datagovhk_td/ferry-tt-ft/resources/en/dataspec/franchised_and_licensed_ferry_time_and_fare_tables_dataspec_eng.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:07Z"
+      "verifiedAt": "2026-11-26T02:40:21Z"
     },
     "7018": {
       "sources": [
@@ -71,7 +71,7 @@
         "https://www.td.gov.hk/datagovhk_td/ferry-tt-ft/resources/en/dataspec/franchised_and_licensed_ferry_time_and_fare_tables_dataspec_eng.pdf"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:07Z"
+      "verifiedAt": "2026-11-26T02:40:23Z"
     },
     "7030": {
       "sources": [
@@ -79,7 +79,7 @@
         "https://www.starferry.com.hk/sites/default/files/upload/open_data/csv/ferry_sf_central_tsimshatsui_faretable_eng.csv"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:06Z"
+      "verifiedAt": "2026-11-26T02:40:16Z"
     },
     "7031": {
       "sources": [
@@ -87,7 +87,7 @@
         "https://www.starferry.com.hk/sites/default/files/upload/open_data/csv/ferry_sf_wanchai_tsimshatsui_faretable_eng.csv"
       ],
       "state": "fresh",
-      "verifiedAt": "2026-11-26T02:22:06Z"
+      "verifiedAt": "2026-11-26T02:40:16Z"
     }
   },
   "schemaVersion": 1,
@@ -96,5 +96,5 @@
     "ferry_timetables.json": "f3ad0d0973aa81902e7728013bcb32adc0ac6b81a46055aaf19f8ca1226c486d"
   },
   "timezone": "Asia/Hong_Kong",
-  "version": "2026-11-26T02:22:07Z"
+  "version": "2026-11-26T02:40:23Z"
 }
