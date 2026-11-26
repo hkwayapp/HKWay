@@ -1,0 +1,3590 @@
+{
+  "7005": [
+    {
+      "amountMinor": 1670,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2610,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 3290,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2480,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 3800,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 4760,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 830,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1300,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1640,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1240,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1900,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2380,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 830,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1300,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1640,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1240,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1900,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2380,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 830,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1300,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1640,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1240,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1900,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2380,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 3200,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 5080,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 6440,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1600,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2540,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 3220,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1600,
+      "category": "Holiday Return Ticket - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2540,
+      "category": "Holiday Return Ticket - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 3220,
+      "category": "Holiday Return Ticket - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1600,
+      "category": "Holiday Return Ticket - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2540,
+      "category": "Holiday Return Ticket - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 3220,
+      "category": "Holiday Return Ticket - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Deluxe Class",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": "Fast Ferry Service",
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 62680,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 62680,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 43870,
+      "category": "Student Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 43870,
+      "category": "Student Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 30620,
+      "category": "Multi-ride Ticket (20 trips)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 18370,
+      "category": "Multi-ride Ticket (12 trips)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 9340,
+      "category": "Multi-ride Ticket (6 trips)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2760,
+      "category": "Bicycle (per bicycle)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2760,
+      "category": "Bicycle (per bicycle)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 25230,
+      "category": "Freight (per cubic metre)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 25230,
+      "category": "Freight (per cubic metre)",
+      "currency": "HKD",
+      "fareClass": "Ordinary Ferry Service - Ordinary Class",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    }
+  ],
+  "7006": [
+    {
+      "amountMinor": 3350,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 4850,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1670,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2420,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1670,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2420,
+      "category": "Single Journey - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1670,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2420,
+      "category": "Single Journey - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 5720,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2860,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2860,
+      "category": "Holiday Return Ticket - Passenger aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2860,
+      "category": "Holiday Return Ticket - Passenger with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 65280,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 45680,
+      "category": "Student Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 35580,
+      "category": "Multi-Ride Ticket (20 Trips)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 21350,
+      "category": "Multi-Ride Ticket (12 Trips)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 19300,
+      "category": "Multi-Ride Ticket (6 Trips)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2630,
+      "category": "Bicycle (per bicycle)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 24120,
+      "category": "Freight (per cubic metre)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7007": [
+    {
+      "amountMinor": 3190,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 4660,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1590,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2330,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1590,
+      "category": "Single Journey - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2330,
+      "category": "Single Journey - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1590,
+      "category": "Single Journey - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2330,
+      "category": "Single Journey - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 4470,
+      "category": "Same-day Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2230,
+      "category": "Same-day Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2230,
+      "category": "Same-day Return Ticket - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2230,
+      "category": "Same-day Return Ticket - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Same-day Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 4470,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2230,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2230,
+      "category": "Holiday Return Ticket - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2230,
+      "category": "Holiday Return Ticket - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 73000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 51100,
+      "category": "Student Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 18800,
+      "category": "Multi-ride Ticket (10 trips)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1740,
+      "category": "Bicycle (each)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 16130,
+      "category": "Freight (per cubic metre)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7008": [
+    {
+      "amountMinor": 3090,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 4350,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1540,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1540,
+      "category": "Single Journey - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Single Journey - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1540,
+      "category": "Single Journey - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Single Journey - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 5390,
+      "category": "Same-day Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2690,
+      "category": "Same-day Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2690,
+      "category": "Same-day Return Ticket - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2690,
+      "category": "Same-day Return Ticket - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Same-day Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 5390,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2690,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2690,
+      "category": "Holiday Return Ticket - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2690,
+      "category": "Holiday Return Ticket - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 89300,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 62500,
+      "category": "Student Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 26100,
+      "category": "Multi-ride Ticket (10 trips)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1740,
+      "category": "Bicycle (each)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 16130,
+      "category": "Freight (per cubic metre)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7009": [
+    {
+      "amountMinor": 2490,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 3470,
+      "category": "Single Journey - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1240,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1730,
+      "category": "Single Journey - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1240,
+      "category": "Single Journey - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1730,
+      "category": "Single Journey - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1240,
+      "category": "Single Journey - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 1730,
+      "category": "Single Journey - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Single Journey - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 4340,
+      "category": "Same-day Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Same-day Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Same-day Return Ticket - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Same-day Return Ticket - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Same-day Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "amountMinor": 4340,
+      "category": "Holiday Return Ticket - Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Holiday Return Ticket - Child (aged 3 years old or above and under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Holiday Return Ticket - Person aged 65 or above",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2170,
+      "category": "Holiday Return Ticket - Person with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 0,
+      "category": "Holiday Return Ticket - Child under 3 years old (accompanied by adult)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "restrictions": [
+        "firstTripFromDestination"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 83900,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 58600,
+      "category": "Student Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 21100,
+      "category": "Multi-ride Ticket (10 trips)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1740,
+      "category": "Bicycle (each)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 16130,
+      "category": "Freight (per cubic metre)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7017": [
+    {
+      "amountMinor": 2410,
+      "category": "Adult",
+      "currency": "HKD",
+      "eligibility": "registered",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1210,
+      "category": "Child under 12 years old",
+      "currency": "HKD",
+      "eligibility": "registered",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1210,
+      "category": "Passenger aged 65 or above",
+      "currency": "HKD",
+      "eligibility": "registered",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 3600,
+      "category": "Adult",
+      "currency": "HKD",
+      "eligibility": "notRegistered",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1800,
+      "category": "Child under 12 years old",
+      "currency": "HKD",
+      "eligibility": "notRegistered",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1800,
+      "category": "Passenger aged 65 or above",
+      "currency": "HKD",
+      "eligibility": "notRegistered",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7018": [
+    {
+      "amountMinor": 1020,
+      "category": "Adult",
+      "currency": "HKD",
+      "eligibility": "registered",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 510,
+      "category": "Child under 12 years old",
+      "currency": "HKD",
+      "eligibility": "registered",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 510,
+      "category": "Passenger aged 65 or above",
+      "currency": "HKD",
+      "eligibility": "registered",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 1200,
+      "category": "Adult",
+      "currency": "HKD",
+      "eligibility": "notRegistered",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 600,
+      "category": "Child under 12 years old",
+      "currency": "HKD",
+      "eligibility": "notRegistered",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 600,
+      "category": "Passenger aged 65 or above",
+      "currency": "HKD",
+      "eligibility": "notRegistered",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7030": [
+    {
+      "amountMinor": 500,
+      "category": "Adult",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 400,
+      "category": "Adult",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 650,
+      "category": "Adult",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 560,
+      "category": "Adult",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 290,
+      "category": "Child (Aged 3 years old or above but under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 280,
+      "category": "Child (Aged 3 years old or above but under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 390,
+      "category": "Child (Aged 3 years old or above but under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 370,
+      "category": "Child (Aged 3 years old or above but under 12 years old)",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 290,
+      "category": "Passengers with disabilities",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 280,
+      "category": "Passengers with disabilities",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 390,
+      "category": "Passengers with disabilities",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 370,
+      "category": "Passengers with disabilities",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 290,
+      "category": "Senior (Aged 65 or above)",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "3"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 280,
+      "category": "Senior (Aged 65 or above)",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "3"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 390,
+      "category": "Senior (Aged 65 or above)",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "3"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 370,
+      "category": "Senior (Aged 65 or above)",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "3"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 19000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "4"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 19000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "4"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 19000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "4"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 19000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "4"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 5000,
+      "category": "4-Day Tourist Ticket",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "5"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 5000,
+      "category": "4-Day Tourist Ticket",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "5"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 5000,
+      "category": "4-Day Tourist Ticket",
+      "currency": "HKD",
+      "fareClass": "Upper Deck",
+      "remarkCodes": [
+        "5"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 5000,
+      "category": "4-Day Tourist Ticket",
+      "currency": "HKD",
+      "fareClass": "Lower Deck",
+      "remarkCodes": [
+        "5"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "7031": [
+    {
+      "amountMinor": 500,
+      "category": "Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 650,
+      "category": "Adult",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 290,
+      "category": "Child (Aged 3 years old or above but under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 390,
+      "category": "Child (Aged 3 years old or above but under 12 years old)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "1"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 290,
+      "category": "Passengers with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 390,
+      "category": "Passengers with disabilities",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "2"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 290,
+      "category": "Senior (Aged 65 or above)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "3"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 390,
+      "category": "Senior (Aged 65 or above)",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "3"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 19000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "4"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 19000,
+      "category": "Monthly Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "4"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 5000,
+      "category": "4-Day Tourist Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "5"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 5000,
+      "category": "4-Day Tourist Ticket",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "5"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "amountMinor": 2500,
+      "category": "Bicycle",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "6"
+      ],
+      "serviceDays": {
+        "publicHoliday": "excluded",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "amountMinor": 2500,
+      "category": "Bicycle",
+      "currency": "HKD",
+      "fareClass": null,
+      "remarkCodes": [
+        "6"
+      ],
+      "serviceDays": {
+        "publicHoliday": "included",
+        "weekdays": [
+          6,
+          7
+        ]
+      }
+    }
+  ]
+}

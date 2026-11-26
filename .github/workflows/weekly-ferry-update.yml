@@ -1,0 +1,59 @@
+name: Weekly ferry dataset update
+
+on:
+  schedule:
+    # Monday 04:30 Hong Kong time (Sunday 20:30 UTC), after the transport window.
+    - cron: "30 20 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ferry-dataset-publication
+  cancel-in-progress: false
+
+jobs:
+  refresh-ferry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v6.1.0
+
+      - name: Run offline ferry checks
+        run: python3 -B -m unittest discover -s Tools/HKWayFerryDataGenerator
+
+      - name: Generate and validate ferry snapshot
+        id: ferry
+        run: |
+          set -euo pipefail
+          work=$(mktemp -d)
+          time python3 -B Tools/HKWayFerryDataGenerator/generate.py --output "$work/staged"
+          python3 -B Tools/HKWayFerryDataGenerator/generate.py --validate-only --output "$work/staged"
+          printf 'path=%s/staged\n' "$work" >> "$GITHUB_OUTPUT"
+
+      - name: Publish validated ferry files only
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          STAGED_FERRY: ${{ steps.ferry.outputs.path }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          mkdir -p FerryDataset
+          files=(ferry_manifest.json ferry_timetables.json ferry_fares.json)
+          for file in "${files[@]}"; do
+            cp "$STAGED_FERRY/$file" "FerryDataset/$file"
+          done
+          git add -- "${files[@]/#/FerryDataset/}"
+          if git diff --cached --quiet; then
+            echo 'No ferry content to publish.'
+            exit 0
+          fi
+          git config user.name 'HK Way Dataset Bot'
+          git config user.email 'actions@github.com'
+          git commit -m 'Update weekly ferry dataset'
+          # A competing transport or ferry push must win; never overwrite it.
+          git push origin "HEAD:refs/heads/$DEFAULT_BRANCH"
