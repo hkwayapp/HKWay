@@ -1,0 +1,48 @@
+{
+  "datasets": {
+    "CTB": {
+      "path": "hkway-transport-a6ea8c27122d74382e2f7523067027c82652bdda9416984ef3a73ad73e5ed1d1.json",
+      "requires": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "revision": "a6ea8c27122d74382e2f7523067027c82652bdda9416984ef3a73ad73e5ed1d1",
+      "sha256": "a6ea8c27122d74382e2f7523067027c82652bdda9416984ef3a73ad73e5ed1d1",
+      "size": 2247874
+    },
+    "GMB": {
+      "path": "hkway-transport-f4126847ed91d1ead61bf6f17b5d511d4ce5e695a001f17cf7097537a9801a08.json",
+      "requires": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "revision": "f4126847ed91d1ead61bf6f17b5d511d4ce5e695a001f17cf7097537a9801a08",
+      "sha256": "f4126847ed91d1ead61bf6f17b5d511d4ce5e695a001f17cf7097537a9801a08",
+      "size": 3264296
+    },
+    "KMB-LWB": {
+      "path": "hkway-transport-4118d572502b13b4ee5d4fcc85fcf52978a15e5ea96cb6ee68ff781d19730345.json",
+      "requires": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "revision": "4118d572502b13b4ee5d4fcc85fcf52978a15e5ea96cb6ee68ff781d19730345",
+      "sha256": "4118d572502b13b4ee5d4fcc85fcf52978a15e5ea96cb6ee68ff781d19730345",
+      "size": 7760614
+    },
+    "LRTFeeder": {
+      "path": "hkway-transport-737d7e8f0bc43ece05fc74cd53c72929b5b24b83c332f89c7df1989395cda14a.json",
+      "requires": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "revision": "737d7e8f0bc43ece05fc74cd53c72929b5b24b83c332f89c7df1989395cda14a",
+      "sha256": "737d7e8f0bc43ece05fc74cd53c72929b5b24b83c332f89c7df1989395cda14a",
+      "size": 104252
+    },
+    "NLB": {
+      "path": "hkway-transport-99bf322df3771eeca43795cc411affa9e2f506f0b9fb5bdbb50134a02e1fc509.json",
+      "requires": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "revision": "99bf322df3771eeca43795cc411affa9e2f506f0b9fb5bdbb50134a02e1fc509",
+      "sha256": "99bf322df3771eeca43795cc411affa9e2f506f0b9fb5bdbb50134a02e1fc509",
+      "size": 312314
+    },
+    "SharedTD": {
+      "path": "hkway-transport-d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131.json",
+      "requires": null,
+      "revision": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "sha256": "d604d08b3cfaa9f979b2ceb6c2c28517ae78412e1f644f5270a8af3ce7f36131",
+      "size": 42165107
+    }
+  },
+  "generation": 1,
+  "schemaVersion": 1
+}
