@@ -65,6 +65,32 @@ def archive(unit, destination, receipts, transport=fetch, pace=time.sleep):
         "Official response bytes are unmodified. Processed output remains private.\n")
 
 
+def replay_diagnostic(result):
+    """Expose only fixed codes and bounded mapping counts, never generator text."""
+    if result.returncode == 0:
+        return {"stage": "replay", "gate": "passed"}
+    if result.returncode < 0:
+        return {"stage": "execution", "gate": "process_terminated"}
+    error = "\n".join(line for line in result.stdout.splitlines() if line.startswith("ERROR:"))
+    coverage = re.search(r"omits ([0-9]{1,7}) of ([0-9]{1,7}) previously mapped canonical positions", error)
+    if coverage:
+        return {"stage": "mapping", "gate": "coverage",
+                "missing": int(coverage[1]), "required": int(coverage[2])}
+    tags = (
+        ("fare", "unverified_fare_identity_or_value", r"Unresolved fare discrepancies"),
+        ("topology_or_fare", "gmb_pinned_baseline", r"GMB topology or fares differ"),
+        ("topology", "retained_td_dependency", r"Cannot retain .*incompatible TD journeys"),
+        ("topology", "canonical_identity", r"Invalid journey topology|Duplicate or invalid TD stop sequence|invalid route membership"),
+        ("schema", "decode_or_parse", r"DecodingError|keyNotFound|typeMismatch|valueNotFound|dataCorrupted|NSXMLParserErrorDomain|(?:RouteBus|RStopBus|StopBus|CompanyCode)XMLReaderError|parseFailed|parsingFailed|invalidHeader|invalidColumnCount"),
+        ("source_archive", "incomplete_replay_inputs", r"IncompleteSources|Missing source provenance"),
+        ("mapping", "reference_identity", r"Invalid or duplicate operator reference|Incomplete or mixed operator membership"),
+    )
+    for stage, gate, pattern in tags:
+        if re.search(pattern, error):
+            return {"stage":stage, "gate":gate}
+    return {"stage": "replay", "gate": "unclassified_failure"}
+
+
 def run(unit, binary, dataset, serving, section_fares, work, receipts, transport=fetch, pace=time.sleep):
     manifest_bytes = (serving/"hkway-transport-manifest.json").read_bytes()
     if sha(manifest_bytes) != MANIFEST_SHA:
@@ -83,11 +109,16 @@ def run(unit, binary, dataset, serving, section_fares, work, receipts, transport
         shutil.copyfile(section_fares, raw/"section_fares.json")
     archive(unit, raw, receipts, transport, pace)
     print("Acquisition: PASS")
-    if unit == "TD":
-        result = swift(binary, "--offline-generate-td", dataset, raw, generated)
-    else:
-        result = swift(binary, "--offline-generate-operator", registry, identity, unit, raw, generated)
+    try:
+        if unit == "TD":
+            result = swift(binary, "--offline-generate-td", dataset, raw, generated)
+        else:
+            result = swift(binary, "--offline-generate-operator", registry, identity, unit, raw, generated)
+    except subprocess.TimeoutExpired:
+        print("Replay diagnostic:", json.dumps({"stage":"execution", "gate":"timeout"}))
+        raise Hold("Private replay timed out") from None
     print("Private replay:", "PASS" if result.returncode == 0 else "HOLD")
+    print("Replay diagnostic:", json.dumps(replay_diagnostic(result), sort_keys=True))
     if not result.returncode and unit != "TD":
         expected = manifest["datasets"][unit]
         original = (serving/expected["path"]).read_bytes()
