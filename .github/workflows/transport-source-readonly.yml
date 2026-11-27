@@ -1,0 +1,37 @@
+name: Bounded transport source validation
+"on":
+  workflow_dispatch:
+    inputs:
+      source:
+        type: choice
+        description: One separately approved source
+        required: true
+        options: [TD, GMB, LRTFeeder]
+permissions:
+  contents: read
+concurrency:
+  group: transport-source-readonly
+  cancel-in-progress: false
+jobs:
+  source:
+    if: github.repository == 'hkwayapp/HKWay' && github.ref == 'refs/heads/main'
+    runs-on: macos-26
+    timeout-minutes: 15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+      TOOL: Tools/HostedTransportValidation
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Build existing standalone generator
+        run: swift build --package-path "$TOOL" -c release
+      - name: Capture and privately replay one approved source
+        env:
+          SOURCE: ${{ inputs.source }}
+        run: |
+          set -euo pipefail
+          umask 077
+          binary="$(swift build --package-path "$TOOL" -c release --show-bin-path)/HKWayDataGenerator"
+          python3 "$TOOL/run_operator_live.py" "$SOURCE" "$binary" Dataset TransportDatasetV1 \
+            Tools/HKWayDataGenerator/Sources/HKWayDataGenerator/Resources/section_fares.json
