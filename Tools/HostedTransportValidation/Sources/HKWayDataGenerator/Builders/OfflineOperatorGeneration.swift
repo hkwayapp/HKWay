@@ -20,9 +20,7 @@ struct OfflineOperatorGeneration {
                     routes: data.routes, journeys: data.journeys, journeyStops: data.journeyStops, stops: data.stops
                 ).references
             case .nlb:
-                try await NLBOperatorStopReferenceBuilder().buildAll(
-                    routes: data.routes, journeys: data.journeys, journeyStops: data.journeyStops, stops: data.stops
-                ).references
+                try await nlbReferences(in: data, raw: raw)
             case .feeder:
                 try await MTRBusOperatorStopReferenceBuilder().buildAll(
                     routes: data.routes, journeys: data.journeys, journeyStops: data.journeyStops, stops: data.stops
@@ -45,6 +43,22 @@ struct OfflineOperatorGeneration {
         try encoder.encode(refs).write(to: privateOutput.appendingPathComponent("references.json"))
         try sourceBytes.write(to: privateOutput.appendingPathComponent("sources.json"))
         try FileManager.default.moveItem(at: privateOutput, to: output)
+    }
+
+    private struct NLBObservation: Encodable {
+        let references: [OperatorStopReference]
+        let ambiguousJourneys: [String]
+    }
+
+    private func nlbReferences(in data: MasterData, raw: URL) async throws -> [OperatorStopReference] {
+        let result = try await NLBOperatorStopReferenceBuilder().buildAll(
+            routes: data.routes, journeys: data.journeys, journeyStops: data.journeyStops, stops: data.stops
+        )
+        if ProcessInfo.processInfo.environment["HKWAY_NLB_PRIVATE_DIAGNOSTICS"] == "1" {
+            let observation = NLBObservation(references: result.references, ambiguousJourneys: result.ambiguousJourneys)
+            try JSONEncoder().encode(observation).write(to: raw.appendingPathComponent("nlb-observed.json"), options: .atomic)
+        }
+        return result.references
     }
 
     private func gmbReferences(in baseline: MasterData) async throws -> [OperatorStopReference] {
