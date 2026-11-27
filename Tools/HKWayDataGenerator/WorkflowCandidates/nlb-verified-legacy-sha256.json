@@ -1,0 +1,11 @@
+{
+  "dataset_info.json": "fdb296f0900593cf9743d12a15e5f602abd31fbecedabeae7bab9a7884d2a6a0",
+  "journey_shapes.json": "d4f6edffe9cd28f18b2cee0c69741171c1d991e228b0d6d73d1155d2732696ec",
+  "journey_stops.json": "be2cd924b8948bad087da1ebb1614068a48c894fa0733679afd55af9b78b06bf",
+  "journeys.json": "3fd0a28542067ea62b37fe051eceab39b1b671d1ad53d21c711d471b4e3998f7",
+  "operator_stop_references.json": "4d96f81709babf37b6df220409b2e99a78c30b764f3b0214a4030375a8984f84",
+  "operators.json": "f25d66d913321b7c9c16d8c97fbab5298e3cb43e4ef4944639c89bcc85e434da",
+  "routes.json": "14b7847a7f79124b151dcf78082cc21dde05cc6f32d510a1ddd980d02b96bfc5",
+  "schedules.json": "ace810d7e2cbb4f8c40ce09dc8e191ae466adb4e1a7d49c59f2215b411d38b05",
+  "stops.json": "81c68f7a6f1d23af9708a9861b2276defbd64aa0284e075fcd3ea219dfbd92da"
+}
