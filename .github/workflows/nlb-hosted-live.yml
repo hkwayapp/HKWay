@@ -1,6 +1,8 @@
 name: Bounded NLB live validation
 "on":
   workflow_dispatch:
+  schedule:
+    - cron: "30 21 * * 4" # Friday 05:30 Asia/Hong_Kong
 permissions:
   contents: read
 concurrency:
