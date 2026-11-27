@@ -1,0 +1,60 @@
+name: NLB synthetic Reader acceptance
+"on":
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: nlb-synthetic-reader-acceptance
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'hkwayapp/HKWay' && github.ref == 'refs/heads/main'
+    environment: dataset-staging-reader
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        id: reader
+        with:
+          app-id: '5949002'
+          private-key: ${{ secrets.DATASET_STAGING_READER_APP_PRIVATE_KEY }}
+          owner: hkwayapp
+          repositories: HKWay-Dataset-Staging
+          permission-contents: read
+          skip-token-revoke: false
+      - name: Verify private checkpoint scope and retrieve pinned bytes
+        env:
+          GH_TOKEN: ${{ steps.reader.outputs.token }}
+          INSTALLATION: ${{ steps.reader.outputs.installation-id }}
+        run: |
+          set -euo pipefail
+          repo=hkwayapp/HKWay-Dataset-Staging
+          root=aec3e31decb75ad8d41ba35a9f42dd31f04ba609
+          test "$INSTALLATION" = 186410240
+          test "$(gh api installation/repositories --jq '.total_count == 1 and .repositories[0].full_name == "hkwayapp/HKWay-Dataset-Staging" and .repositories[0].private')" = true
+          test "$(gh api "repos/$repo/git/ref/heads/nlb-synthetic-acceptance" --jq .object.sha)" = "$root"
+          test "$(gh api "repos/$repo/commits/$root" --jq '.parents | length')" = 0
+          test "$(gh api "repos/$repo/git/trees/$root" --jq '.tree | length')" = 1
+          gh api "repos/$repo/contents/nlb-synthetic-checkpoint.json?ref=$root" --jq .content |
+            base64 --decode > "$RUNNER_TEMP/nlb-synthetic-checkpoint.json"
+      - name: Verify Generation 1, negative cases and receipt
+        run: |
+          set -euo pipefail
+          python3 Tools/HKWayDataGenerator/WorkflowCandidates/check_nlb_synthetic_checkpoint.py verify \
+            "$RUNNER_TEMP/nlb-synthetic-checkpoint.json" \
+            --sha256 6aa3767172ba80f2ae1ad829b1639ea4adf47b9029f24426a1c29b72cb5c8387 \
+            --repository "$GITHUB_WORKSPACE" --head "$GITHUB_SHA" \
+            --receipts "$RUNNER_TEMP/nlb-synthetic-receipts"
+          cd "$RUNNER_TEMP/nlb-synthetic-receipts"
+          for receipt in *.json; do
+            printf '%s  %s\n' "${receipt%.json}" "$receipt" | sha256sum --check
+          done
+      - name: Remove temporary checkpoint and receipt
+        if: always()
+        run: |
+          rm -f "$RUNNER_TEMP/nlb-synthetic-checkpoint.json"
+          rm -f "$RUNNER_TEMP"/nlb-synthetic-receipts/*.json
