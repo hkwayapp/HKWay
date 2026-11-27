@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: ferry-dataset-publication
@@ -15,13 +15,17 @@ concurrency:
 
 jobs:
   refresh-ferry:
+    if: github.repository == 'hkwayapp/HKWay' && github.ref == 'refs/heads/main'
+    environment: ferry-publisher
     runs-on: ubuntu-latest
     timeout-minutes: 15
     defaults:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v6.1.0
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
 
       - name: Run offline ferry checks
         run: python3 -B -m unittest discover -s Tools/HKWayFerryDataGenerator
@@ -35,11 +39,11 @@ jobs:
           python3 -B Tools/HKWayFerryDataGenerator/generate.py --validate-only --output "$work/staged"
           printf 'path=%s/staged\n' "$work" >> "$GITHUB_OUTPUT"
 
-      - name: Publish validated ferry files only
+      - name: Stage validated ferry commit
+        id: publication
         if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         env:
           STAGED_FERRY: ${{ steps.ferry.outputs.path }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           set -euo pipefail
           mkdir -p FerryDataset
@@ -54,6 +58,46 @@ jobs:
           fi
           git config user.name 'HK Way Dataset Bot'
           git config user.email 'actions@github.com'
+          allowed=$(for file in "${files[@]}"; do printf "FerryDataset/%s\n" "$file"; done)
+          while IFS= read -r -d '' path; do
+            grep -Fxq -- "$path" <<< "$allowed" || { echo "Unexpected staged path"; exit 1; }
+          done < <(git diff --cached --name-only --no-renames -z)
           git commit -m 'Update weekly ferry dataset'
-          # A competing transport or ferry push must win; never overwrite it.
-          git push origin "HEAD:refs/heads/$DEFAULT_BRANCH"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        if: steps.publication.outputs.changed == 'true'
+        id: publisher
+        with:
+          client-id: 'Iv23li8YM9IhzhhZPKbl'
+          private-key: ${{ secrets.DATASET_FERRY_APP_PRIVATE_KEY }}
+          owner: hkwayapp
+          repositories: HKWay
+          permission-contents: write
+          skip-token-revoke: false
+
+      - name: Push validated commit with the dedicated publisher
+        if: steps.publication.outputs.changed == 'true'
+        env:
+          PUBLISHER_TOKEN: ${{ steps.publisher.outputs.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "$GITHUB_SHA"
+          url=https://github.com/hkwayapp/HKWay.git
+          auth=$(printf 'x-access-token:%s' "$PUBLISHER_TOKEN" | base64 | tr -d '\n')
+          echo "::add-mask::$auth"
+          unset PUBLISHER_TOKEN
+          export GIT_TERMINAL_PROMPT=0 GIT_CONFIG_COUNT=3
+          export GIT_CONFIG_KEY_0="http.$url.extraHeader" GIT_CONFIG_VALUE_0="Authorization: Basic $auth"
+          export GIT_CONFIG_KEY_1=http.followRedirects GIT_CONFIG_VALUE_1=false
+          export GIT_CONFIG_KEY_2=credential.helper GIT_CONFIG_VALUE_2=
+          test "$(git ls-remote "$url" refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+          hooks=$(mktemp -d)
+          trap 'rm -f "$hooks/pre-push"; rmdir "$hooks"' EXIT
+          cat > "$hooks/pre-push" <<'HOOK'
+          #!/bin/sh
+          read -r local_ref local_sha remote_ref remote_sha || exit 1
+          test "$remote_ref" = refs/heads/main && test "$remote_sha" = "$GITHUB_SHA"
+          HOOK
+          chmod 700 "$hooks/pre-push"
+          git -c core.hooksPath="$hooks" push --no-follow-tags "$url" HEAD:refs/heads/main

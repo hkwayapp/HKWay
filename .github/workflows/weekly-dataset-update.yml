@@ -7,17 +7,21 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   refresh-dataset:
+    if: github.repository == 'hkwayapp/HKWay' && github.ref == 'refs/heads/main'
+    environment: legacy-publisher
     name: Refresh official transport data
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
     steps:
       - name: Check out HK Way
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
 
       - name: Refresh Transport Department source files
         working-directory: Tools/HKWayDataGenerator/Sources/HKWayDataGenerator/Resources
@@ -56,7 +60,7 @@ jobs:
           printf 'binary=%s/HKWayDataGenerator\n' "$bin" >> "$GITHUB_OUTPUT"
 
       - name: Restore verified CTB stop history
-        uses: actions/cache/restore@v5.1.0
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: ${{ runner.temp }}/hkway-ctb-stop-history.json
           key: hkway-ctb-v1-${{ github.run_id }}-${{ github.run_attempt }}
@@ -78,7 +82,7 @@ jobs:
 
       - name: Save verified CTB stop history
         if: ${{ !cancelled() && (steps.dataset.outcome == 'success' || steps.dataset.outcome == 'failure') }}
-        uses: actions/cache/save@v5.1.0
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
           path: ${{ runner.temp }}/hkway-ctb-stop-history.json
           key: hkway-ctb-v1-${{ github.run_id }}-${{ github.run_attempt }}
@@ -93,6 +97,7 @@ jobs:
           done
 
       - name: Commit only a changed dataset
+        id: publication
         run: |
           set -euo pipefail
           if git diff --quiet -- Dataset; then
@@ -101,6 +106,48 @@ jobs:
           fi
           git config user.name 'HK Way Dataset Bot'
           git config user.email 'actions@github.com'
-          git add Dataset
+          files=(operators routes journeys journey_stops stops schedules operator_stop_references dataset_info)
+          for file in "${files[@]}"; do git add -- "Dataset/$file.json"; done
+          allowed=$(for file in "${files[@]}"; do printf "Dataset/%s.json\n" "$file"; done)
+          while IFS= read -r -d '' path; do
+            grep -Fxq -- "$path" <<< "$allowed" || { echo "Unexpected staged path"; exit 1; }
+          done < <(git diff --cached --name-only --no-renames -z)
           git commit -m 'Update weekly transport dataset'
-          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        if: steps.publication.outputs.changed == 'true'
+        id: publisher
+        with:
+          client-id: 'Iv23liqGtgjzWywSDnk9'
+          private-key: ${{ secrets.DATASET_LEGACY_APP_PRIVATE_KEY }}
+          owner: hkwayapp
+          repositories: HKWay
+          permission-contents: write
+          skip-token-revoke: false
+
+      - name: Push validated commit with the dedicated publisher
+        if: steps.publication.outputs.changed == 'true'
+        env:
+          PUBLISHER_TOKEN: ${{ steps.publisher.outputs.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "$GITHUB_SHA"
+          url=https://github.com/hkwayapp/HKWay.git
+          auth=$(printf 'x-access-token:%s' "$PUBLISHER_TOKEN" | base64 | tr -d '\n')
+          echo "::add-mask::$auth"
+          unset PUBLISHER_TOKEN
+          export GIT_TERMINAL_PROMPT=0 GIT_CONFIG_COUNT=3
+          export GIT_CONFIG_KEY_0="http.$url.extraHeader" GIT_CONFIG_VALUE_0="Authorization: Basic $auth"
+          export GIT_CONFIG_KEY_1=http.followRedirects GIT_CONFIG_VALUE_1=false
+          export GIT_CONFIG_KEY_2=credential.helper GIT_CONFIG_VALUE_2=
+          test "$(git ls-remote "$url" refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+          hooks=$(mktemp -d)
+          trap 'rm -f "$hooks/pre-push"; rmdir "$hooks"' EXIT
+          cat > "$hooks/pre-push" <<'HOOK'
+          #!/bin/sh
+          read -r local_ref local_sha remote_ref remote_sha || exit 1
+          test "$remote_ref" = refs/heads/main && test "$remote_sha" = "$GITHUB_SHA"
+          HOOK
+          chmod 700 "$hooks/pre-push"
+          git -c core.hooksPath="$hooks" push --no-follow-tags "$url" HEAD:refs/heads/main
