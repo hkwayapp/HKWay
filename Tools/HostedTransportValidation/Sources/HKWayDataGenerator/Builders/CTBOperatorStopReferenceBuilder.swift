@@ -1,0 +1,1111 @@
+//
+//  CTBOperatorStopReferenceBuilder.swift
+//  HK Way
+//
+//  Created by Ken on 15/8/2026.
+//
+
+import Foundation
+
+struct CTBOperatorStopReferenceBuilder {
+
+    private let sequenceAligner =
+        CTBStopSequenceAligner()
+
+    private let cache =
+        CTBOperatorStopReferenceCache()
+
+    // MARK: - Full Network
+
+    func buildAll(
+        routes: [Route],
+        journeys: [Journey],
+        journeyStops: [JourneyStop],
+        stops: [Stop]
+    ) async throws
+        -> CTBOperatorStopReferenceBuildResult {
+
+        let ctbRoutes =
+            routes.filter {
+                $0.supportsOperator("CTB")
+            }
+
+        let journeysByRoute =
+            Dictionary(
+                grouping: journeys,
+                by: \.routeId
+            )
+
+        let journeyStopsByJourney =
+            Dictionary(
+                grouping: journeyStops,
+                by: \.journeyId
+            )
+
+        let localStopLookup =
+            Dictionary(
+                uniqueKeysWithValues:
+                    stops.map {
+                        ($0.id, $0)
+                    }
+            )
+
+            // MARK: - Prefetch CTB Network Data
+
+            print("")
+            print("*** CTB network prefetch ***")
+
+            var allCTBStopIds:
+                Set<String> = []
+
+            let routeNumbers =
+                Set(
+                    ctbRoutes.map {
+                        $0.number
+                    }
+                )
+
+            print(
+                "Unique CTB route numbers:",
+                routeNumbers.count
+            )
+
+            let routeDirectionPairs =
+                routeNumbers.sorted().flatMap { routeNumber in
+                    ["outbound", "inbound"].map {
+                        (routeNumber, $0)
+                    }
+                }
+
+            // Fetch a small batch at a time. The former fully sequential loop
+            // made the weekly GitHub Action exceed its 30-minute time limit.
+            for startIndex in stride(
+                from: 0,
+                to: routeDirectionPairs.count,
+                by: 8
+            ) {
+                let endIndex = min(
+                    startIndex + 8,
+                    routeDirectionPairs.count
+                )
+                let batch = routeDirectionPairs[startIndex..<endIndex]
+
+                await withTaskGroup(
+                    of: [CTBRouteStopRecord].self
+                ) { group in
+                    for (routeNumber, direction) in batch {
+                        group.addTask {
+                            do {
+                                return try await cache.routeStops(
+                                    route: routeNumber,
+                                    direction: direction
+                                )
+                            } catch {
+                                await DatasetHTTP.recordFailure("CTB route \(routeNumber)/\(direction)", error)
+                                print(
+                                    "CTB route-stop prefetch failed",
+                                    "| route:", routeNumber,
+                                    "| direction:", direction,
+                                    "| error:", error
+                                )
+                                return []
+                            }
+                        }
+                    }
+
+                    for await routeStops in group {
+                        for routeStop in routeStops {
+                            allCTBStopIds.insert(routeStop.stop)
+                        }
+                    }
+                }
+            }
+
+            print(
+                "Unique CTB stop IDs:",
+                allCTBStopIds.count
+            )
+
+            await cache.prefetchStops(
+                stopIds:
+                    allCTBStopIds,
+                concurrency:
+                    8
+            )
+            await cache.saveHistory()
+
+            print("")
+            print("*** CTB alignment phase ***")
+            
+            
+        var references:
+            [OperatorStopReference] = []
+
+        var matchedJourneys = 0
+
+        var unmatchedRoutes:
+            [String] = []
+
+        var unmatchedJourneys:
+            [String] = []
+
+        var ambiguousJourneys:
+            [String] = []
+
+        var rejectedJourneys:
+            [String] = []
+
+        for route in ctbRoutes {
+
+            let routeJourneys =
+                journeysByRoute[
+                    route.id
+                ] ?? []
+
+            guard !routeJourneys.isEmpty else {
+
+                unmatchedRoutes.append(
+                    "\(route.id) | \(route.number)"
+                )
+
+                continue
+            }
+
+            for journey in routeJourneys {
+
+                let localJourneyStops =
+                    (
+                        journeyStopsByJourney[
+                            journey.id
+                        ] ?? []
+                    )
+                    .sorted {
+                        $0.sequence <
+                            $1.sequence
+                    }
+
+                guard
+                    !localJourneyStops.isEmpty
+                else {
+
+                    unmatchedJourneys.append(
+                        "\(journey.id) | no journey stops"
+                    )
+
+                    continue
+                }
+
+                do {
+
+                    guard let result =
+                        try await buildCandidate(
+                            route:
+                                route,
+                            journey:
+                                journey,
+                            localJourneyStops:
+                                localJourneyStops,
+                            localStopLookup:
+                                localStopLookup
+                        )
+                    else {
+
+                        unmatchedJourneys.append(
+                            journey.id
+                        )
+
+                        continue
+                    }
+
+                    // Require strong HK Way coverage.
+                    //
+                    // CTB can contain additional stops
+                    // that are not represented in the
+                    // HK Way journey, so CTB-only
+                    // gaps are allowed.
+
+                    guard
+                        result.score.coverage >= 0.90,
+                        result.score.matchedCount >= 2
+                    else {
+
+                        rejectedJourneys.append(
+                            "\(journey.id) | direction \(result.direction) | coverage \(String(format: "%.3f", result.score.coverage)) | matched \(result.score.matchedCount)"
+                        )
+
+                        continue
+                    }
+
+                    if result.isAmbiguous {
+
+                        ambiguousJourneys.append(
+                            journey.id
+                        )
+
+                        continue
+                    }
+
+                    references.append(
+                        contentsOf:
+                            result.references
+                    )
+
+                    matchedJourneys += 1
+
+                } catch {
+
+                    unmatchedJourneys.append(
+                        "\(journey.id) | \(error)"
+                    )
+                }
+            }
+        }
+
+        return CTBOperatorStopReferenceBuildResult(
+            references:
+                references,
+            matchedJourneys:
+                matchedJourneys,
+            unmatchedRoutes:
+                unmatchedRoutes.sorted(),
+            unmatchedJourneys:
+                unmatchedJourneys.sorted(),
+            ambiguousJourneys:
+                ambiguousJourneys.sorted(),
+            rejectedJourneys:
+                rejectedJourneys.sorted()
+        )
+    }
+
+    // MARK: - Single Journey Diagnostic
+
+    func build(
+        route: Route,
+        journey: Journey,
+        journeyStops: [JourneyStop],
+        stops: [Stop]
+    ) async throws
+        -> [OperatorStopReference] {
+
+        guard
+            route.supportsOperator("CTB")
+        else {
+            return []
+        }
+
+        let localJourneyStops =
+            journeyStops
+                .filter {
+                    $0.journeyId ==
+                        journey.id
+                }
+                .sorted {
+                    $0.sequence <
+                        $1.sequence
+                }
+
+        guard
+            !localJourneyStops.isEmpty
+        else {
+            return []
+        }
+
+        let localStopLookup =
+            Dictionary(
+                uniqueKeysWithValues:
+                    stops.map {
+                        ($0.id, $0)
+                    }
+            )
+
+        let candidates =
+            try await makeDirectionCandidates(
+                route:
+                    route,
+                localJourneyStops:
+                    localJourneyStops,
+                localStopLookup:
+                    localStopLookup
+            )
+
+        guard let winner =
+            bestCandidate(
+                from: candidates
+            )
+        else {
+
+            print(
+                "CTB direction unresolved",
+                "| route:",
+                route.number,
+                "| journey:",
+                journey.id
+            )
+
+            return []
+        }
+
+        print("")
+        print("*** CTB journey diagnostic ***")
+        print("Route:", route.number)
+        print("Journey:", journey.id)
+
+        print(
+            "Selected direction:",
+            winner.direction
+        )
+
+        print(
+            "HK Way stops:",
+            localJourneyStops.count
+        )
+
+        print("")
+        print("*** CTB candidate scores ***")
+
+        for candidate in candidates {
+
+            print(
+                "Direction:",
+                candidate.direction,
+                "| matched:",
+                candidate.score.matchedCount,
+                "| coverage:",
+                String(
+                    format: "%.3f",
+                    candidate.score.coverage
+                ),
+                "| HK Way-only:",
+                candidate.score
+                    .transitGoOnlyCount,
+                "| CTB-only:",
+                candidate.score
+                    .ctbOnlyCount,
+                "| avg:",
+                String(
+                    format: "%.1f m",
+                    candidate.score
+                        .averageDistance
+                ),
+                "| max:",
+                String(
+                    format: "%.1f m",
+                    candidate.score
+                        .maximumDistance
+                )
+            )
+        }
+
+            if !winner.alignment.transitGoOnly.isEmpty {
+
+                print("")
+                print("*** HK Way-only stops ***")
+
+                for journeyStop in
+                    winner.alignment.transitGoOnly {
+
+                    let stop =
+                        localStopLookup[
+                            journeyStop.stopId
+                        ]
+
+                    print(
+                        "seq:",
+                        journeyStop.sequence,
+                        "| stop:",
+                        journeyStop.stopId,
+                        "|",
+                        stop?.nameEnglish ?? "unknown"
+                    )
+                }
+            }
+
+            if !winner.alignment.ctbOnly.isEmpty {
+
+                print("")
+                print("*** CTB-only stops ***")
+
+                for routeStop in
+                    winner.alignment.ctbOnly {
+
+                    let stop =
+                        try? await cache.stop(
+                            stopId:
+                                routeStop.stop
+                        )
+
+                    print(
+                        "seq:",
+                        routeStop.sequence,
+                        "| stop:",
+                        routeStop.stop,
+                        "|",
+                        stop?.nameEnglish ?? "unknown"
+                    )
+                }
+            }
+            
+            
+            
+        print("")
+        print("*** Selected CTB alignment ***")
+
+        print(
+            "Matched:",
+            winner.score.matchedCount
+        )
+
+        print(
+            "HK Way-only:",
+            winner.score
+                .transitGoOnlyCount
+        )
+
+        print(
+            "CTB-only:",
+            winner.score
+                .ctbOnlyCount
+        )
+
+        print(
+            "Average distance:",
+            String(
+                format: "%.1f m",
+                winner.score
+                    .averageDistance
+            )
+        )
+
+        print(
+            "Maximum distance:",
+            String(
+                format: "%.1f m",
+                winner.score
+                    .maximumDistance
+            )
+        )
+
+        return makeReferences(
+            from:
+                winner,
+            journey:
+                journey
+        )
+    }
+
+    // MARK: - Build Candidate
+
+    private func buildCandidate(
+        route: Route,
+        journey: Journey,
+        localJourneyStops: [JourneyStop],
+        localStopLookup: [String: Stop]
+    ) async throws
+        -> CTBBuildCandidateResult? {
+
+        let candidates =
+            try await makeDirectionCandidates(
+                route:
+                    route,
+                localJourneyStops:
+                    localJourneyStops,
+                localStopLookup:
+                    localStopLookup
+            )
+
+        guard let winner =
+            bestCandidate(
+                from: candidates
+            )
+        else {
+            return nil
+        }
+
+        let references =
+            makeReferences(
+                from:
+                    winner,
+                journey:
+                    journey
+            )
+
+        let rankedCandidates =
+            rankCandidates(
+                candidates
+            )
+
+        let isAmbiguous: Bool
+
+        if rankedCandidates.count >= 2 {
+
+            let first =
+                rankedCandidates[0]
+
+            let second =
+                rankedCandidates[1]
+
+            isAmbiguous =
+                abs(
+                    first.score.coverage -
+                    second.score.coverage
+                ) < 0.05 &&
+                abs(
+                    first.score.matchedCount -
+                    second.score.matchedCount
+                ) <= 1
+
+        } else {
+
+            isAmbiguous = false
+        }
+
+        return CTBBuildCandidateResult(
+            direction:
+                winner.direction,
+            references:
+                references,
+            score:
+                winner.score,
+            isAmbiguous:
+                isAmbiguous
+        )
+    }
+
+    // MARK: - Direction Candidates
+
+    private func makeDirectionCandidates(
+        route: Route,
+        localJourneyStops: [JourneyStop],
+        localStopLookup: [String: Stop]
+    ) async throws
+        -> [CTBDirectionCandidate] {
+
+        var candidates:
+            [CTBDirectionCandidate] = []
+
+        for direction in [
+            "outbound",
+            "inbound"
+        ] {
+
+            do {
+
+                let apiRouteStops =
+                    try await cache.routeStops(
+                        route:
+                            route.number,
+                        direction:
+                            direction
+                    )
+                    .sorted {
+                        $0.sequence <
+                            $1.sequence
+                    }
+
+                guard
+                    !apiRouteStops.isEmpty
+                else {
+                    continue
+                }
+
+                var ctbStopLookup:
+                    [String: CTBStopRecord] = [:]
+
+                for routeStop in apiRouteStops {
+
+                    if ctbStopLookup[
+                        routeStop.stop
+                    ] != nil {
+                        continue
+                    }
+
+                    let stop =
+                        try await cache.stop(
+                            stopId:
+                                routeStop.stop
+                        )
+
+                    ctbStopLookup[
+                        routeStop.stop
+                    ] = stop
+                }
+
+                let alignment =
+                    sequenceAligner.align(
+                        transitGoStops:
+                            localJourneyStops,
+                        ctbStops:
+                            apiRouteStops,
+                        localStopLookup:
+                            localStopLookup,
+                        ctbStopLookup:
+                            ctbStopLookup
+                    )
+
+                let alignmentScore = CTBAlignmentScore(alignment: alignment)
+
+                candidates.append(
+                    CTBDirectionCandidate(
+                        direction:
+                            direction,
+                        alignment:
+                            alignment,
+                        score:
+                            alignmentScore
+                    )
+                )
+
+            } catch {
+
+                await DatasetHTTP.recordFailure("CTB route \(route.number)/\(direction)", error)
+                print(
+                    "CTB direction candidate failed",
+                    "| route:",
+                    route.number,
+                    "| direction:",
+                    direction,
+                    "| error:",
+                    error
+                )
+            }
+        }
+
+        return candidates
+    }
+
+    // MARK: - Make References
+
+    private func makeReferences(
+        from candidate:
+            CTBDirectionCandidate,
+        journey: Journey
+    ) -> [OperatorStopReference] {
+
+        candidate.alignment
+            .matchedPairs
+            .map {
+                pair in
+
+                OperatorStopReference(
+                    operatorId:
+                        "CTB",
+                    journeyId:
+                        journey.id,
+                    stopId:
+                        pair.transitGoStop
+                            .stopId,
+                    sequence:
+                        pair.transitGoStop
+                            .sequence,
+                    operatorStopId:
+                        pair.ctbStop.stop,
+                    operatorServiceType:
+                        "",
+                    operatorDirection:
+                        candidate.direction
+                )
+            }
+            .sorted {
+                $0.sequence <
+                    $1.sequence
+            }
+    }
+
+    // MARK: - Best Candidate
+
+    private func bestCandidate(
+        from candidates:
+            [CTBDirectionCandidate]
+    ) -> CTBDirectionCandidate? {
+
+        rankCandidates(
+            candidates
+        )
+        .first
+    }
+
+    private func rankCandidates(
+        _ candidates:
+            [CTBDirectionCandidate]
+    ) -> [CTBDirectionCandidate] {
+
+        candidates
+            .filter {
+                $0.score.matchedCount > 0
+            }
+            .sorted { $0.score.ranksBefore($1.score) }
+    }
+}
+
+
+// MARK: - Full Build Result
+
+struct CTBOperatorStopReferenceBuildResult {
+
+    let references:
+        [OperatorStopReference]
+
+    let matchedJourneys: Int
+
+    let unmatchedRoutes:
+        [String]
+
+    let unmatchedJourneys:
+        [String]
+
+    let ambiguousJourneys:
+        [String]
+
+    let rejectedJourneys:
+        [String]
+}
+
+
+// MARK: - Build Candidate Result
+
+private struct CTBBuildCandidateResult {
+
+    let direction: String
+
+    let references:
+        [OperatorStopReference]
+
+    let score:
+        CTBAlignmentScore
+
+    let isAmbiguous: Bool
+}
+
+
+// MARK: - Direction Candidate
+
+private struct CTBDirectionCandidate {
+
+    let direction: String
+
+    let alignment:
+        CTBStopSequenceAlignment
+
+    let score:
+        CTBAlignmentScore
+}
+
+
+// MARK: - Alignment Score
+
+struct CTBAlignmentScore {
+    let matchedCount: Int
+    let coverage: Double
+    let transitGoOnlyCount: Int
+    let ctbOnlyCount: Int
+    let averageDistance: Double
+    let maximumDistance: Double
+    let averageAlignmentCost: Double
+
+    init(alignment: CTBStopSequenceAlignment) {
+        let pairs = alignment.matchedPairs
+        matchedCount = pairs.count
+        transitGoOnlyCount = alignment.transitGoOnly.count
+        ctbOnlyCount = alignment.ctbOnly.count
+        let total = matchedCount + transitGoOnlyCount
+        coverage = total == 0 ? 0 : Double(matchedCount) / Double(total)
+        let distances = pairs.map(\.distanceMeters)
+        averageDistance = distances.isEmpty ? 0 : distances.reduce(0, +) / Double(pairs.count)
+        maximumDistance = distances.max() ?? 0
+        averageAlignmentCost = pairs.isEmpty ? 0 : pairs.map(\.alignmentCost).reduce(0, +) / Double(pairs.count)
+    }
+
+    func ranksBefore(_ other: CTBAlignmentScore) -> Bool {
+        if coverage != other.coverage { return coverage > other.coverage }
+        if matchedCount != other.matchedCount { return matchedCount > other.matchedCount }
+        if transitGoOnlyCount != other.transitGoOnlyCount { return transitGoOnlyCount < other.transitGoOnlyCount }
+        if ctbOnlyCount != other.ctbOnlyCount { return ctbOnlyCount < other.ctbOnlyCount }
+        return averageAlignmentCost < other.averageAlignmentCost
+    }
+}
+
+// MARK: - CTB API Cache
+
+private actor CTBOperatorStopReferenceCache {
+
+    private let routeStopAPI =
+        CTBRouteStopAPI()
+
+    private let history = CTBStopHistory()
+    // Offline replay must continue to require every captured source.
+    private let rawStopCache: CTBStopDetailCache? = {
+        let env = ProcessInfo.processInfo.environment
+        guard DatasetHTTP.replay == nil, let path = env["HKWAY_CTB_STOP_CACHE"], !path.isEmpty else { return nil }
+        let days = env["HKWAY_CTB_STOP_CACHE_MAX_AGE_DAYS"].flatMap(Double.init)
+        let seconds = days.map { $0 * 86_400 }
+        let age = seconds.flatMap { $0.isFinite && $0 > 0 ? $0 : nil } ?? CTBStopDetailCache.defaultMaximumAge
+        return CTBStopDetailCache(directory: URL(fileURLWithPath: path), maximumAge: age)
+    }()
+    private var unavailableStops: Set<String> = []
+
+    private var routeStopsByKey:
+        [String: [CTBRouteStopRecord]] = [:]
+
+    private var stopsById:
+        [String: CTBStopRecord] = [:]
+
+    // MARK: - Route Stops
+
+    func routeStops(
+        route: String,
+        direction: String
+    ) async throws
+        -> [CTBRouteStopRecord] {
+
+        let key =
+            "\(route)|\(direction)"
+
+        if let cached =
+            routeStopsByKey[key] {
+
+            return cached
+        }
+
+        let records =
+            try await routeStopAPI.fetch(
+                route:
+                    route,
+                direction:
+                    direction
+            )
+
+        routeStopsByKey[key] =
+            records
+
+        return records
+    }
+
+    // MARK: - Single Stop
+
+    func stop(
+        stopId: String
+    ) async throws
+        -> CTBStopRecord {
+
+        if let cached =
+            stopsById[stopId] {
+
+            return cached
+        }
+
+        guard !unavailableStops.contains(stopId) else {
+            throw CTBStopAPIError.invalidResponse
+        }
+        let record = try await resolveStop(stopId)
+
+        stopsById[stopId] =
+            record
+
+        return record
+    }
+
+    private func resolveStop(_ id: String) async throws -> CTBStopRecord {
+        do {
+            if let rawStopCache {
+                guard let url = CTBStopAPI.sourceURL(for: id) else { throw CTBStopAPIError.invalidURL }
+                let (body, status) = try await CTBStopAPI().rawResponse(stopId: id, retry: false)
+                let retrievedAt = Date()
+                return try rawStopCache.store(body, for: id, sourceURL: url, retrievedAt: retrievedAt,
+                                             httpStatus: status, now: retrievedAt)
+            }
+            switch try await history.resolve(id, fetch: { try await CTBStopAPI().fetch(stopId: id) }) {
+            case .current(let stop):
+                return stop
+            case .historical(let stop):
+                let routes = affectedRoutes(for: id)
+                print("CTB retained stop \(id); affected routes/directions: \(routes)")
+                await DatasetHTTP.recordRetention("CTB historical stop \(id) [\(routes)]")
+                return stop
+            }
+        } catch {
+            let routes = affectedRoutes(for: id)
+            unavailableStops.insert(id)
+            await DatasetHTTP.recordFailure("CTB missing stop \(id) [\(routes)]", error)
+            throw error
+        }
+    }
+
+    private func affectedRoutes(for id: String) -> String {
+        routeStopsByKey.filter { $0.value.contains { $0.stop == id } }.keys.sorted().joined(separator: ", ")
+    }
+
+    func saveHistory() async {
+        guard let rawStopCache else {
+            await history.save()
+            return
+        }
+        guard await DatasetHTTP.issueCount() == 0 else { return }
+        do {
+            try rawStopCache.saveTopology(routeStopsByKey.mapValues(CTBStopDetailCache.positions))
+        } catch {
+            print("CTB stop cache topology could not be saved: \(error)")
+        }
+    }
+
+    // MARK: - Prefetch Stops
+
+    func prefetchStops(
+        stopIds: Set<String>,
+        concurrency: Int = 8
+    ) async {
+
+        if let rawStopCache {
+            let plan = rawStopCache.plan(stopIDs: stopIds, topology: routeStopsByKey.mapValues(CTBStopDetailCache.positions), now: Date())
+            stopsById.merge(plan.cached) { _, verified in verified }
+        }
+
+        let missingStopIds =
+            stopIds.filter {
+                stopsById[$0] == nil
+            }
+
+        guard
+            !missingStopIds.isEmpty
+        else {
+            return
+        }
+
+        let ids = missingStopIds.sorted()
+
+        let batchSize =
+            max(
+                1,
+                concurrency
+            )
+
+        print("")
+        print("*** CTB stop prefetch ***")
+        print(
+            "Unique stops to fetch:",
+            ids.count
+        )
+        print(
+            "Concurrency:",
+            batchSize
+        )
+
+        var completed = 0
+        var failed = 0
+
+        for startIndex in
+            stride(
+                from: 0,
+                to: ids.count,
+                by: batchSize
+            ) {
+
+            let endIndex =
+                min(
+                    startIndex + batchSize,
+                    ids.count
+                )
+
+            let batch =
+                Array(
+                    ids[
+                        startIndex..<endIndex
+                    ]
+                )
+
+            let results =
+                await withTaskGroup(
+                    of:
+                        CTBPrefetchedStop?.self
+                ) {
+                    group in
+
+                    for stopId in batch {
+
+                        group.addTask {
+
+                            do {
+
+                                let record =
+                                    try await self.resolveStop(stopId)
+
+                                return CTBPrefetchedStop(
+                                    stopId:
+                                        stopId,
+                                    record:
+                                        record
+                                )
+
+                            } catch {
+
+                                print(
+                                    "CTB stop fetch failed",
+                                    "| stop:",
+                                    stopId,
+                                    "| error:",
+                                    error
+                                )
+
+                                return nil
+                            }
+                        }
+                    }
+
+                    var batchResults:
+                        [CTBPrefetchedStop] = []
+
+                    for await result in group {
+
+                        if let result {
+                            batchResults.append(
+                                result
+                            )
+                        }
+                    }
+
+                    return batchResults
+                }
+
+            for result in results {
+
+                stopsById[
+                    result.stopId
+                ] = result.record
+            }
+
+            completed += results.count
+
+            failed +=
+                batch.count -
+                results.count
+
+            print(
+                "CTB stop prefetch progress:",
+                "\(completed + failed)/\(ids.count)",
+                "| success:",
+                completed,
+                "| failed:",
+                failed
+            )
+        }
+
+        print("")
+        print(
+            "CTB stop prefetch complete",
+            "| success:",
+            completed,
+            "| failed:",
+            failed
+        )
+    }
+}
+
+
+// MARK: - Prefetched Stop
+
+private struct CTBPrefetchedStop:
+    Sendable {
+
+    let stopId: String
+
+    let record: CTBStopRecord
+}
