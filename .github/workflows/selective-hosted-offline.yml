@@ -1,0 +1,38 @@
+name: Synthetic NLB hosted validation
+"on":
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: transport-selective-synthetic
+  cancel-in-progress: false
+jobs:
+  nlb-synthetic:
+    if: github.repository == 'hkwayapp/HKWay' && github.ref == 'refs/heads/main'
+    runs-on: macos-26
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+      TOOL: Tools/HostedTransportValidation
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Build standalone Swift generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          swift --version
+          python3 --version
+          swift build --package-path "$TOOL" -c release
+      - name: Verify published manifest and replay synthetic NLB fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          manifest="$RUNNER_TEMP/published-manifest.json"
+          curl -fsS --connect-timeout 15 --max-time 45 \
+            https://raw.githubusercontent.com/hkwayapp/HKWay/main/TransportDatasetV1/hkway-transport-manifest.json \
+            -o "$manifest"
+          binary="$(swift build --package-path "$TOOL" -c release --show-bin-path)/HKWayDataGenerator"
+          python3 "$TOOL/run_synthetic_nlb.py" "$binary" "$TOOL/synthetic-nlb.json" \
+            9030bb9aeff168593993e68800df38b735c2bb920d31f8b814c3424ff05a7b58 "$manifest"
